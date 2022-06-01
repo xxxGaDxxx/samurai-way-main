@@ -8,36 +8,12 @@ import {BrowserRouter, Route} from 'react-router-dom';
 import {Music} from './components/Music/Music';
 import {News} from './components/News/News';
 import {Settings} from './components/Settings/Settings';
+import {Friends} from './components/Friends/Friends';
+import {StatePropsType} from './redux/state';
 
-export type PostDataType = {
-    id: number
-    message: string
-    likesCount: number
-}
-export type DialogsDataType = {
-    id: number
-    name: string
-    foto:string
-}
-export type Messagestype = {
-    id: number
-    message: string
-}
-type ProfilePagePropsType = {
-    postData: PostDataType[]
-}
-type DilogsPagePropsType = {
-    dialogsData: DialogsDataType[]
-    messages: Messagestype[]
-}
-type StatePropsType = {
-    profilePage: ProfilePagePropsType
-    dilogsPage: DilogsPagePropsType
-}
 type AppPropsType = {
     state: StatePropsType
 }
-
 
 function App(props: AppPropsType) {
 
@@ -45,7 +21,7 @@ function App(props: AppPropsType) {
         <BrowserRouter>
             <div className="app-wrapper">
                 <Heder/>
-                <Navbar/>
+                <Navbar friends={props.state.sidebar.friends}/>
                 <div className="app-wrapper-content">
                     <Route path={'/profile'}
                            render={() => <Profile postData={props.state.profilePage.postData}/>}/>
@@ -58,6 +34,8 @@ function App(props: AppPropsType) {
                            render={() => <Music/>}/>
                     <Route path={'/settings'}
                            render={() => <Settings/>}/>
+                    <Route path={'/friends'}
+                           render={() => <Friends friends={props.state.sidebar.friends}/>}/>
                 </div>
             </div>
         </BrowserRouter>

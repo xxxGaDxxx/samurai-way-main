@@ -1,5 +1,5 @@
 import React from 'react';
-import s from './../Dialogs.module.css'
+import s from './../Friends.module.css'
 import {NavLink} from 'react-router-dom';
 
 type DialogPropsType = {
@@ -8,11 +8,13 @@ type DialogPropsType = {
     foto:string
 }
 
-export const DialogItem: React.FC<DialogPropsType> = (props) => {
+export const FriendsItem: React.FC<DialogPropsType> = (props) => {
+
     return (
-        <div className={`${s.dialog} ${s.active}`}>
+        <div className={`${s.friends} ${s.active}`}>
             <img src={props.foto}/>
             <NavLink to={`/dialogs/${props.id}`}>{props.name}</NavLink>
         </div>
-    )
-}
+    );
+};
+
