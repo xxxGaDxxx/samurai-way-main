@@ -8,7 +8,7 @@ type PostPropsType={
 
 export const Post = (props:PostPropsType) => {
     return (
-        <div className={s.post}>
+        <div className={s.posts}>
             <div className={s.item}>
                 <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdDKH8Ew3p9hw0I9QKHFDP58aWZ-d6NUfHkA&usqp=CAU'/>
                 {props.message}

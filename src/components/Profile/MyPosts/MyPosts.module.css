@@ -1,3 +1,10 @@
 .item{
     color: deeppink;
 }
+.posts_Block{
+    padding: 10px;
+}
+.posts{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
