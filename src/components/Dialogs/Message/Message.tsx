@@ -6,7 +6,7 @@ type MessagePropsType = {
     foto: string
     name: string
 }
-export const Message: React.FC< MessagePropsType> = (props) => {
+export const Message: React.FC<MessagePropsType> = (props) => {
     return (
         <div className={s.message}>
             <img src={props.foto} alt={'avatar'} className={s.avatar}/>
@@ -14,7 +14,6 @@ export const Message: React.FC< MessagePropsType> = (props) => {
             <div className={s.content}>
                 <div className={s.name}>{props.name}</div>
                 <div className={s.title}>{props.message}</div>
-
             </div>
         </div>
     )

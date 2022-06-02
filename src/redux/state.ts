@@ -1,4 +1,3 @@
-
 export type PostDataType = {
     id: number
     message: string
@@ -7,18 +6,18 @@ export type PostDataType = {
 export type DialogsDataType = {
     id: number
     name: string
-    foto:string
+    foto: string
 }
 export type Messagestype = {
     id: number
     message: string
-    foto:string
-    name:string
+    foto: string
+    name: string
 }
-export type FriendsType={
-    id:number
-    name:string
-    foto:string
+export type FriendsType = {
+    id: number
+    name: string
+    foto: string
 }
 export type ProfilePagePropsType = {
     postData: PostDataType[]
@@ -27,20 +26,16 @@ export type DilogsPagePropsType = {
     dialogsData: DialogsDataType[]
     messages: Messagestype[]
 }
-export type SidebarPropsType={
+export type SidebarPropsType = {
     friends: FriendsType[]
 }
 export type StatePropsType = {
     profilePage: ProfilePagePropsType
-    dilogsPage: DilogsPagePropsType
-    sidebar:SidebarPropsType
+    dialogsPage: DilogsPagePropsType
+    sidebar: SidebarPropsType
 }
 
-
-
-
-
-export const state:StatePropsType = {
+export const state: StatePropsType = {
     profilePage: {
         postData: [
             {id: 1, message: 'Hi,Pascha', likesCount: 5},
@@ -49,7 +44,7 @@ export const state:StatePropsType = {
             {id: 4, message: 'YO YO YO!!!', likesCount: 20},
         ],
     },
-    dilogsPage: {
+    dialogsPage: {
         dialogsData: [
             {
                 id: 1,
