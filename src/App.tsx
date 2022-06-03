@@ -9,36 +9,38 @@ import {Music} from './components/Music/Music';
 import {News} from './components/News/News';
 import {Settings} from './components/Settings/Settings';
 import {Friends} from './components/Friends/Friends';
-import {StatePropsType} from './redux/state';
+import {StatePropsType, StorePropsType} from './redux/state';
 
 
-type AppPropsType = {
-    state: StatePropsType
-    addPost: (postPost: string) => void
+type AppType = {
+    store: StorePropsType
+    /*addPost: (postPost: string) => void
     addMessage: (postMessage: string) => void
     updateNewPostText: (newText: string) => void
-    updateNewMessageText: (newMessage: string) => void
+    updateNewMessageText: (newMessage: string) => void*/
 }
 
-function App(props: AppPropsType) {
+export const App: React.FC<AppType> = (props) => {
+
+    const state = props.store.getState
 
     return (
         <BrowserRouter>
             <div className="app-wrapper">
                 <Heder/>
-                <Navbar friends={props.state.sidebar.friends}/>
+                <Navbar friends={props.store._state.sidebar.friends}/>
                 <div className="app-wrapper-content">
                     <Route path={'/profile'}
-                           render={() => <Profile postData={props.state.profilePage.postData}
-                                                  addPost={props.addPost}
-                                                  newPostText={props.state.profilePage.newPostText}
-                                                  updateNewPostText={props.updateNewPostText}/>}/>
+                           render={() => <Profile postData={props.store._state.profilePage.postData}
+                                                  addPost={props.store.addPost.bind(props.store)}
+                                                  newPostText={props.store._state.profilePage.newPostText}
+                                                  updateNewPostText={props.store.updateNewPostText.bind(props.store)}/>}/>
                     <Route path={'/dialogs'}
-                           render={() => <Dialogs dialogsData={props.state.dialogsPage.dialogsData}
-                                                  messages={props.state.dialogsPage.messages}
-                                                  addMessage={props.addMessage}
-                                                  NewMessageText={props.state.dialogsPage.NewMessageText}
-                                                  updateNewMessageText={props.updateNewMessageText}/>}/>
+                           render={() => <Dialogs dialogsData={props.store._state.dialogsPage.dialogsData}
+                                                  messages={props.store._state.dialogsPage.messages}
+                                                  addMessage={props.store.addMessage.bind(props.store)}
+                                                  NewMessageText={props.store._state.dialogsPage.NewMessageText}
+                                                  updateNewMessageText={props.store.updateNewMessageText.bind(props.store)}/>}/>
                     <Route path={'/news'}
                            render={() => <News/>}/>
                     <Route path={'/music'}
@@ -46,11 +48,11 @@ function App(props: AppPropsType) {
                     <Route path={'/settings'}
                            render={() => <Settings/>}/>
                     <Route path={'/friends'}
-                           render={() => <Friends friends={props.state.sidebar.friends}/>}/>
+                           render={() => <Friends friends={props.store._state.sidebar.friends}/>}/>
                 </div>
             </div>
         </BrowserRouter>
     );
 }
 
-export default App;
+

@@ -1,18 +1,7 @@
-import {
-    addMessage,
-    addPost,
-    state,
-    subsckibe,
-    updateNewMessageText,
-    updateNewPostText
-} from './redux/state';
-import ReactDOM from 'react-dom';
-import App from './App';
+import {store} from './redux/state';
 import React from 'react';
+import {render} from './render';
 
-const renderEntireTree = () => {
-    ReactDOM.render(<App state={state} addPost={addPost} addMessage={addMessage} updateNewPostText={updateNewPostText}
-                         updateNewMessageText={updateNewMessageText}/>, document.getElementById('root')
-    );
-}
-subsckibe(renderEntireTree)
+
+store.subscribe(render)
+render()
