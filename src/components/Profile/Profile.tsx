@@ -7,8 +7,6 @@ type ProfilePropsTyp = {
     postData: PostDataType[]
     newPostText: string
     dispatch: (action: ActionPropsType) => void
-    /*updateNewPostText: (newText: string) => void
-    addPost: (postPost: string) => void*/
 }
 
 export const Profile: React.FC<ProfilePropsTyp> = (props) => {
@@ -17,7 +15,7 @@ export const Profile: React.FC<ProfilePropsTyp> = (props) => {
         <div>
             <ProfileInfo/>
             <MyPosts postData={props.postData} newPostText={props.newPostText}
-                /*updateNewPostText={props.updateNewPostText}  addPost={props.addPost}*/ dispatch={props.dispatch}/>
+                     dispatch={props.dispatch}/>
         </div>
     );
 };

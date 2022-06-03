@@ -2,7 +2,7 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
-import {ActionPropsType, DialogsDataType, MessagesType} from '../../redux/state';
+import {ActionPropsType, addMewssageActionCreator, DialogsDataType, MessagesType} from '../../redux/state';
 
 
 type DialogsPropsType = {
@@ -10,8 +10,6 @@ type DialogsPropsType = {
     messages: MessagesType[]
     newMessageText: string
     dispatch: (action: ActionPropsType) => void
-    /*addMessage: (postMessage: string) => void
-    updateNewMessageText: (newMessage: string) => void*/
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
@@ -22,7 +20,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
 
     const addMewssage = () => {
-        props.dispatch({type: 'ADD-MESSAGE', postMessage: props.newMessageText})
+        props.dispatch(addMewssageActionCreator(props.newMessageText))
     }
 
     const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {

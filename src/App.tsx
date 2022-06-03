@@ -29,15 +29,13 @@ export const App: React.FC<AppType> = (props) => {
                            render={() => <Profile postData={props.store._state.profilePage.postData}
                                                   dispatch={props.store.dispatch.bind(props.store)}
                                                   newPostText={props.store._state.profilePage.newPostText}
-                               /*addPost={props.store.addPost.bind(props.store)}*/
-                               /*updateNewPostText={props.store.updateNewPostText.bind(props.store)}*//>}/>
+                           />}/>
                     <Route path={'/dialogs'}
                            render={() => <Dialogs dialogsData={props.store._state.dialogsPage.dialogsData}
                                                   messages={props.store._state.dialogsPage.messages}
                                                   newMessageText={props.store._state.dialogsPage.newMessageText}
                                                   dispatch={props.store.dispatch.bind(props.store)}
-                               /*addMessage={props.store.addMessage.bind(props.store)}
-                               updateNewMessageText={props.store.updateNewMessageText.bind(props.store)}*//>}/>
+                           />}/>
                     <Route path={'/news'}
                            render={() => <News/>}/>
                     <Route path={'/music'}

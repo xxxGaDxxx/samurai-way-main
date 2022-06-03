@@ -48,28 +48,12 @@ export type StorePropsType = {
     getState: () => StatePropsType
     dispatch: (action: ActionPropsType) => void
 }
-type AddPostActionType = {
-    type: 'ADD-POST'
-    postPost: string
-}
-type UpdateNewPostTextActionType = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-type AddMessageActionType = {
-    type: 'ADD-MESSAGE'
-    postMessage: string
-}
 
-type UpdateNewMessageTextActionType = {
-    type: 'UPDATE-NEW-MESSAGE-TEXT'
-    newMessage: string
-}
 export type ActionPropsType =
-    AddPostActionType
-    | UpdateNewPostTextActionType
-    | AddMessageActionType
-    | UpdateNewMessageTextActionType
+    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof onPostChangeActionCreator>
+    | ReturnType<typeof addMewssageActionCreator>
+    | ReturnType<typeof onMessageChangeActionCreator>
 
 export const store: StorePropsType = {
     _state: {
@@ -160,37 +144,6 @@ export const store: StorePropsType = {
         return this._state
     },
 
-    /*addPost(postPost: string) {
-        const newPost: PostDataType = {
-            id: 5,
-            message: postPost,
-            likesCount: 0,
-        }
-        this._state.profilePage.postData.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber()
-    },*/
-    /*updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber()
-    },*/
-    /*addMessage(postMessage: string) {
-        const newMessage: MessagesType = {
-            id: 5,
-            name: 'Wlad',
-            message: postMessage,
-            foto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdDKH8Ew3p9hw0I9QKHFDP58aWZ-d6NUfHkA&usqp=CAU'
-        }
-        this._state.dialogsPage.messages.push(newMessage)
-        this._state.dialogsPage.NewMessageText = ''
-        this._callSubscriber()
-    },*/
-    /* updateNewMessageText(newMessage: string) {
-         this._state.dialogsPage.NewMessageText = newMessage
-         this._callSubscriber()
-     },*/
-
-
     dispatch(action: any) {
         if (action.type === 'ADD-POST') {
             const newPost: PostDataType = {
@@ -219,6 +172,29 @@ export const store: StorePropsType = {
             this._callSubscriber()
         }
     },
-
 }
 
+export const addPostActionCreator = (postPost: string) => {
+    return {
+        type: 'ADD-POST',
+        postPost: postPost
+    }
+}
+export const onPostChangeActionCreator = (newText: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText: newText
+    }
+}
+export const addMewssageActionCreator = (postMessage: string) => {
+    return {
+        type: 'ADD-MESSAGE',
+        postMessage: postMessage
+    }
+}
+export const onMessageChangeActionCreator = (newMessage: string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-TEXT',
+        newMessage: newMessage
+    }
+}
