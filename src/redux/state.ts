@@ -26,7 +26,7 @@ export type ProfilePagePropsType = {
 export type DilogsPagePropsType = {
     dialogsData: DialogsDataType[]
     messages: MessagesType[]
-    NewMessageText: string
+    newMessageText: string
 }
 export type SidebarPropsType = {
     friends: FriendsType[]
@@ -40,13 +40,36 @@ export type StatePropsType = {
 export type StorePropsType = {
     _state: StatePropsType
     _callSubscriber: () => void
-    addPost: (postPost: string) => void
-    updateNewPostText: (newText: string) => void
-    addMessage: (postMessage: string) => void
-    updateNewMessageText: (newMessage: string) => void
+    /*addPost: (postPost: string) => void
+    updateNewPostText: (newText: string) => void*/
+    /* addMessage: (postMessage: string) => void
+     updateNewMessageText: (newMessage: string) => void*/
     subscribe: (observer: () => void) => void
     getState: () => StatePropsType
+    dispatch: (action: ActionPropsType) => void
 }
+type AddPostActionType = {
+    type: 'ADD-POST'
+    postPost: string
+}
+type UpdateNewPostTextActionType = {
+    type: 'UPDATE-NEW-POST-TEXT'
+    newText: string
+}
+type AddMessageActionType = {
+    type: 'ADD-MESSAGE'
+    postMessage: string
+}
+
+type UpdateNewMessageTextActionType = {
+    type: 'UPDATE-NEW-MESSAGE-TEXT'
+    newMessage: string
+}
+export type ActionPropsType =
+    AddPostActionType
+    | UpdateNewPostTextActionType
+    | AddMessageActionType
+    | UpdateNewMessageTextActionType
 
 export const store: StorePropsType = {
     _state: {
@@ -102,7 +125,7 @@ export const store: StorePropsType = {
                     foto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdDKH8Ew3p9hw0I9QKHFDP58aWZ-d6NUfHkA&usqp=CAU'
                 },
             ],
-            NewMessageText: '',
+            newMessageText: '',
         },
         sidebar: {
             friends: [
@@ -128,7 +151,16 @@ export const store: StorePropsType = {
     _callSubscriber() {
         console.log('state change')
     },
-    addPost(postPost: string) {
+
+    subscribe(observer: () => void) {
+        this._callSubscriber = observer
+
+    },
+    getState() {
+        return this._state
+    },
+
+    /*addPost(postPost: string) {
         const newPost: PostDataType = {
             id: 5,
             message: postPost,
@@ -137,12 +169,12 @@ export const store: StorePropsType = {
         this._state.profilePage.postData.push(newPost)
         this._state.profilePage.newPostText = ''
         this._callSubscriber()
-    },
-    updateNewPostText(newText: string) {
+    },*/
+    /*updateNewPostText(newText: string) {
         this._state.profilePage.newPostText = newText
         this._callSubscriber()
-    },
-    addMessage(postMessage: string) {
+    },*/
+    /*addMessage(postMessage: string) {
         const newMessage: MessagesType = {
             id: 5,
             name: 'Wlad',
@@ -152,18 +184,41 @@ export const store: StorePropsType = {
         this._state.dialogsPage.messages.push(newMessage)
         this._state.dialogsPage.NewMessageText = ''
         this._callSubscriber()
-    },
-    updateNewMessageText(newMessage: string) {
-        this._state.dialogsPage.NewMessageText = newMessage
-        this._callSubscriber()
-    },
-    subscribe(observer: () => void) {
-        this._callSubscriber = observer
+    },*/
+    /* updateNewMessageText(newMessage: string) {
+         this._state.dialogsPage.NewMessageText = newMessage
+         this._callSubscriber()
+     },*/
 
+
+    dispatch(action: any) {
+        if (action.type === 'ADD-POST') {
+            const newPost: PostDataType = {
+                id: 5,
+                message: action.postPost,
+                likesCount: 0,
+            }
+            this._state.profilePage.postData.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber()
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._callSubscriber()
+        } else if (action.type === 'ADD-MESSAGE') {
+            const newMessage: MessagesType = {
+                id: 5,
+                name: 'Wlad',
+                message: action.postMessage,
+                foto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdDKH8Ew3p9hw0I9QKHFDP58aWZ-d6NUfHkA&usqp=CAU'
+            }
+            this._state.dialogsPage.messages.push(newMessage)
+            this._state.dialogsPage.newMessageText = ''
+            this._callSubscriber()
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
+            this._state.dialogsPage.newMessageText = action.newMessage
+            this._callSubscriber()
+        }
     },
-    getState() {
-        return this._state
-    }
 
 }
 
