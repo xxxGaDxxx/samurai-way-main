@@ -1,3 +1,7 @@
+let renderEntireTree = () => {
+    console.log('state change')
+}
+
 export type PostDataType = {
     id: number
     message: string
@@ -8,7 +12,7 @@ export type DialogsDataType = {
     name: string
     foto: string
 }
-export type Messagestype = {
+export type MessagesType = {
     id: number
     message: string
     foto: string
@@ -21,10 +25,12 @@ export type FriendsType = {
 }
 export type ProfilePagePropsType = {
     postData: PostDataType[]
+    newPostText: string
 }
 export type DilogsPagePropsType = {
     dialogsData: DialogsDataType[]
-    messages: Messagestype[]
+    messages: MessagesType[]
+    NewMessageText: string
 }
 export type SidebarPropsType = {
     friends: FriendsType[]
@@ -43,6 +49,7 @@ export const state: StatePropsType = {
             {id: 3, message: 'How are you?', likesCount: 20},
             {id: 4, message: 'YO YO YO!!!', likesCount: 20},
         ],
+        newPostText: '',
     },
     dialogsPage: {
         dialogsData: [
@@ -87,6 +94,7 @@ export const state: StatePropsType = {
                 foto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdDKH8Ew3p9hw0I9QKHFDP58aWZ-d6NUfHkA&usqp=CAU'
             },
         ],
+        NewMessageText: '',
     },
     sidebar: {
         friends: [
@@ -107,5 +115,43 @@ export const state: StatePropsType = {
             },
         ]
     },
+
+}
+
+export const addPost = (postPost: string) => {
+    const newPost: PostDataType = {
+        id: 5,
+        message: postPost,
+        likesCount: 0,
+    }
+    state.profilePage.postData.push(newPost)
+    state.profilePage.newPostText = ''
+    renderEntireTree()
+}
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
+    renderEntireTree()
+}
+
+
+export const addMessage = (postMessage: string) => {
+    const newMessage: MessagesType = {
+        id: 5,
+        name: 'Wlad',
+        message: postMessage,
+        foto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdDKH8Ew3p9hw0I9QKHFDP58aWZ-d6NUfHkA&usqp=CAU'
+    }
+    state.dialogsPage.messages.push(newMessage)
+    state.dialogsPage.NewMessageText = ''
+    renderEntireTree()
+}
+export const updateNewMessageText = (newMessage: string) => {
+    state.dialogsPage.NewMessageText = newMessage
+    renderEntireTree()
+}
+
+export const subsckibe = (observer: () => void) => {
+    renderEntireTree = observer
 
 }

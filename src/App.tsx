@@ -11,8 +11,13 @@ import {Settings} from './components/Settings/Settings';
 import {Friends} from './components/Friends/Friends';
 import {StatePropsType} from './redux/state';
 
+
 type AppPropsType = {
     state: StatePropsType
+    addPost: (postPost: string) => void
+    addMessage: (postMessage: string) => void
+    updateNewPostText: (newText: string) => void
+    updateNewMessageText: (newMessage: string) => void
 }
 
 function App(props: AppPropsType) {
@@ -24,10 +29,16 @@ function App(props: AppPropsType) {
                 <Navbar friends={props.state.sidebar.friends}/>
                 <div className="app-wrapper-content">
                     <Route path={'/profile'}
-                           render={() => <Profile postData={props.state.profilePage.postData}/>}/>
+                           render={() => <Profile postData={props.state.profilePage.postData}
+                                                  addPost={props.addPost}
+                                                  newPostText={props.state.profilePage.newPostText}
+                                                  updateNewPostText={props.updateNewPostText}/>}/>
                     <Route path={'/dialogs'}
                            render={() => <Dialogs dialogsData={props.state.dialogsPage.dialogsData}
-                                                  messages={props.state.dialogsPage.messages}/>}/>
+                                                  messages={props.state.dialogsPage.messages}
+                                                  addMessage={props.addMessage}
+                                                  NewMessageText={props.state.dialogsPage.NewMessageText}
+                                                  updateNewMessageText={props.updateNewMessageText}/>}/>
                     <Route path={'/news'}
                            render={() => <News/>}/>
                     <Route path={'/music'}
