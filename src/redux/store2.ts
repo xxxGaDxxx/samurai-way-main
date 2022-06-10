@@ -60,7 +60,7 @@ export const store2: StorePropsType = {
     _state: {
         profilePage: {
             postData: [
-                {id: 1, message: 'Hi,Pascha', likesCount: 5},
+                {id: 1, message: 'НЕ СТАВИТЬ НОВЫЕ БИБЛИОТЕКИ!!!!', likesCount: 5},
                 {id: 2, message: 'Hi, Wlad', likesCount: 15},
                 {id: 3, message: 'How are you?', likesCount: 20},
                 {id: 4, message: 'YO YO YO!!!', likesCount: 20},
@@ -93,7 +93,7 @@ export const store2: StorePropsType = {
             messages: [
                 {
                     id: 1,
-                    message: 'Hi',
+                    message: 'НЕ СТАВИТЬ НОВЫЕ БИБЛИОТЕКИ!!!!',
                     name: 'Wlad',
                     foto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdDKH8Ew3p9hw0I9QKHFDP58aWZ-d6NUfHkA&usqp=CAU'
                 },

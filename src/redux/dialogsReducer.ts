@@ -32,7 +32,7 @@ let initialDialogsState = {
     messages: [
         {
             id: 1,
-            message: 'Hi',
+            message: 'НЕ СТАВИТЬ НОВЫЕ БИБЛИОТЕКИ!!!!',
             name: 'Wlad',
             foto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdDKH8Ew3p9hw0I9QKHFDP58aWZ-d6NUfHkA&usqp=CAU'
         },

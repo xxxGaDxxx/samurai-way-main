@@ -7,10 +7,9 @@ type initialProfileStateType={
 
 let initialPropfileState = {
     postData: [
-        {id: 1, message: 'Hi,Pascha', likesCount: 5},
-        {id: 2, message: 'Hi, Wlad', likesCount: 15},
-        {id: 3, message: 'How are you?', likesCount: 20},
-        {id: 4, message: 'YO YO YO!!!', likesCount: 20},
+        {id: 1, message: 'НЕ СТАВИТЬ НОВЫЕ БИБЛИОТЕКИ!!!!', likesCount: 5},
+        {id: 2, message: 'НЕ СТАВИТЬ НОВЫЕ БИБЛИОТЕКИ!!!!', likesCount: 15},
+
     ],
     newPostText: '',
 }
