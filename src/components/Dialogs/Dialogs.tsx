@@ -2,7 +2,12 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
-import {ActionPropsType, addMewssageActionCreator, DialogsDataType, MessagesType} from '../../redux/state';
+import {
+    ActionPropsType,
+    DialogsDataType,
+    MessagesType,
+} from '../../redux/state';
+import {addMewssageAC, onMessageChangeAC} from '../../redux/dialogsReducer';
 
 
 type DialogsPropsType = {
@@ -15,16 +20,15 @@ type DialogsPropsType = {
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     let dialogsElemets = props.dialogsData.map((d) => <DialogItem name={d.name} key={d.id} id={d.id} foto={d.foto}/>)
-    let messagesElemets = props.messages.map((m) => <Message message={m.message} key={m.id} foto={m.foto}
-                                                             name={m.name}/>)
+    let messagesElemets = props.messages.map((m) => <Message message={m.message} key={m.id} name={m.name} foto={m.foto}/>)
 
 
     const addMewssage = () => {
-        props.dispatch(addMewssageActionCreator(props.newMessageText))
+        props.dispatch(addMewssageAC(props.newMessageText))
     }
 
     const onMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch({type: 'UPDATE-NEW-MESSAGE-TEXT', newMessage: e.currentTarget.value})
+        props.dispatch(onMessageChangeAC(e.currentTarget.value))
     }
 
     return (
@@ -38,7 +42,9 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
                     <div>
                         <textarea value={props.newMessageText} onChange={onMessageChange}></textarea>
                     </div>
-                    <button onClick={addMewssage}>Add Message</button>
+                    <div>
+                        <button onClick={addMewssage}>Send</button>
+                    </div>
                 </div>
             </div>
 

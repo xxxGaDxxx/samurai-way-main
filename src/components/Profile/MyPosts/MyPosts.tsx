@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
-import {ActionPropsType, addPostActionCreator, onPostChangeActionCreator, PostDataType} from '../../../redux/state';
+import {ActionPropsType, PostDataType} from '../../../redux/state';
+import {addPostAC,onPostChangeAC} from '../../../redux/profileReducer';
 
 
 type MyPostsPropsType = {
@@ -16,11 +17,11 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     let postsElement = props.postData.map((p) => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     const addPost = () => {
-        props.dispatch(addPostActionCreator(props.newPostText))
+        props.dispatch(addPostAC(props.newPostText))
     }
 
     const onPostChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(onPostChangeActionCreator(e.currentTarget.value))
+        props.dispatch(onPostChangeAC(e.currentTarget.value))
     }
 
 

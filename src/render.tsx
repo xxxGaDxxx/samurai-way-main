@@ -7,5 +7,4 @@ export let renderTree = () => {
     ReactDOM.render(<App
         store={store}/>, document.getElementById('root')
     );
-
 }
