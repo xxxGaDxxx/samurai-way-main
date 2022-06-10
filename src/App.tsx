@@ -45,6 +45,7 @@ export const App: React.FC<AppType> = (props) => {
                     <Route path={'/friends'}
                            render={() => <Friends friends={props.store._state.sidebar.friends}/>}/>
                 </div>
+                <p>q</p>
             </div>
         </BrowserRouter>
     );
