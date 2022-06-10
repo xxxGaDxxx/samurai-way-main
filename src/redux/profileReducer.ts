@@ -1,7 +1,21 @@
-import {ActionPropsType, PostDataType, ProfilePagePropsType} from './state';
+import {ActionPropsType, PostDataType} from './store2';
 
+type initialProfileStateType={
+    postData: PostDataType[]
+    newPostText: string
+}
 
-export const ProfileReducer = (state: ProfilePagePropsType, action: ActionPropsType) => {
+let initialPropfileState = {
+    postData: [
+        {id: 1, message: 'Hi,Pascha', likesCount: 5},
+        {id: 2, message: 'Hi, Wlad', likesCount: 15},
+        {id: 3, message: 'How are you?', likesCount: 20},
+        {id: 4, message: 'YO YO YO!!!', likesCount: 20},
+    ],
+    newPostText: '',
+}
+
+export const profileReducer = (state:initialProfileStateType =initialPropfileState, action: ActionPropsType):initialProfileStateType => {
     switch (action.type) {
         case 'ADD-POST': {
             const newPost: PostDataType = {

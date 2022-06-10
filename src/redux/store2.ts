@@ -1,5 +1,6 @@
-import {addPostAC, onPostChangeAC, ProfileReducer} from './profileReducer';
-import {addMewssageAC, DialogsReducer, onMessageChangeAC} from './dialogsReducer';
+import {addPostAC, onPostChangeAC, profileReducer} from './profileReducer';
+import {addMewssageAC, dialogsReducer, onMessageChangeAC} from './dialogsReducer';
+import {sidebarReducer} from './sidebarReducer';
 
 export type PostDataType = {
     id: number
@@ -37,7 +38,7 @@ export type SidebarPropsType = {
 export type StatePropsType = {
     profilePage: ProfilePagePropsType
     dialogsPage: DilogsPagePropsType
-    sidebar: SidebarPropsType
+    sidebarPage: SidebarPropsType
 }
 
 export type StorePropsType = {
@@ -55,7 +56,7 @@ export type ActionPropsType =
     | ReturnType<typeof addMewssageAC>
     | ReturnType<typeof onMessageChangeAC>
 
-export const store: StorePropsType = {
+export const store2: StorePropsType = {
     _state: {
         profilePage: {
             postData: [
@@ -111,7 +112,7 @@ export const store: StorePropsType = {
             ],
             newMessageText: '',
         },
-        sidebar: {
+        sidebarPage: {
             friends: [
                 {
                     id: 1,
@@ -145,60 +146,12 @@ export const store: StorePropsType = {
     },
 
     dispatch(action: ActionPropsType) {
-        this._state.profilePage = ProfileReducer(this._state.profilePage, action)
-        this._state.dialogsPage = DialogsReducer(this._state.dialogsPage, action)
-        this._callSubscriber()
+        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
+        this._state.sidebarPage = sidebarReducer(this._state.sidebarPage, action)
 
-        /*if (action.type === 'ADD-POST') {
-            const newPost: PostDataType = {
-                id: 5,
-                message: action.postPost,
-                likesCount: 0,
-            }
-            this._state.profilePage.postData.push(newPost)
-            this._state.profilePage.newPostText = ''
-            this._callSubscriber()
-        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
-            this._state.profilePage.newPostText = action.newText
-            this._callSubscriber()
-        } else if (action.type === 'ADD-MESSAGE') {
-            const newMessage: MessagesType = {
-                id: 5,
-                name: 'Wlad',
-                message: action.postMessage,
-                foto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdDKH8Ew3p9hw0I9QKHFDP58aWZ-d6NUfHkA&usqp=CAU'
-            }
-            this._state.dialogsPage.messages.push(newMessage)
-            this._state.dialogsPage.newMessageText = ''
-            this._callSubscriber()
-        } else if (action.type === 'UPDATE-NEW-MESSAGE-TEXT') {
-            this._state.dialogsPage.newMessageText = action.newMessage
-            this._callSubscriber()
-        }*/
+        this._callSubscriber()
     },
 }
 
-/*export const addPostAC = (postPost: string) => {
-    return {
-        type: 'ADD-POST',
-        postPost: postPost
-    } as const
-}
-export const onPostChangeAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
-    } as const
-}*/
-/*export const addMewssageAC = (postMessage: string) => {
-    return {
-        type: 'ADD-MESSAGE',
-        postMessage: postMessage
-    } as const
-}
-export const onMessageChangeAC = (newMessage: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newMessage: newMessage
-    } as const
-}*/
+

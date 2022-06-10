@@ -4,36 +4,38 @@ import {Heder} from './components/Header/Heder';
 import {Navbar} from './components/Navbar/Navbar';
 import {Profile} from './components/Profile/Profile';
 import {Dialogs} from './components/Dialogs/Dialogs';
-import {BrowserRouter, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import {Music} from './components/Music/Music';
 import {News} from './components/News/News';
 import {Settings} from './components/Settings/Settings';
 import {Friends} from './components/Friends/Friends';
-import {StorePropsType} from './redux/state';
+import { AppStoreType} from './redux/redux-store';
 
 
 type AppType = {
-    store: StorePropsType
+    store: AppStoreType
 }
 
 export const App: React.FC<AppType> = (props) => {
+    let state = props.store.getState()
 
 
     return (
-        <BrowserRouter>
+
             <div className="app-wrapper">
                 <Heder/>
-                <Navbar friends={props.store._state.sidebar.friends}/>
+                <Navbar friends={state.sidebarPage.friends}/>
                 <div className="app-wrapper-content">
                     <Route path={'/profile'}
-                           render={() => <Profile postData={props.store._state.profilePage.postData}
+                           render={() => <Profile postData={state.profilePage.postData}
                                                   dispatch={props.store.dispatch.bind(props.store)}
-                                                  newPostText={props.store._state.profilePage.newPostText}
+                                                  newPostText={state.profilePage.newPostText}
+
                            />}/>
                     <Route path={'/dialogs'}
-                           render={() => <Dialogs dialogsData={props.store._state.dialogsPage.dialogsData}
-                                                  messages={props.store._state.dialogsPage.messages}
-                                                  newMessageText={props.store._state.dialogsPage.newMessageText}
+                           render={() => <Dialogs dialogsData={state.dialogsPage.dialogsData}
+                                                  messages={state.dialogsPage.messages}
+                                                  newMessageText={state.dialogsPage.newMessageText}
                                                   dispatch={props.store.dispatch.bind(props.store)}
                            />}/>
                     <Route path={'/news'}
@@ -43,10 +45,9 @@ export const App: React.FC<AppType> = (props) => {
                     <Route path={'/settings'}
                            render={() => <Settings/>}/>
                     <Route path={'/friends'}
-                           render={() => <Friends friends={props.store._state.sidebar.friends}/>}/>
+                           render={() => <Friends friends={state.sidebarPage.friends}/>}/>
                 </div>
             </div>
-        </BrowserRouter>
     );
 }
 

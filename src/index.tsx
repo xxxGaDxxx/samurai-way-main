@@ -1,7 +1,7 @@
-import {store} from './redux/state';
+import {store} from './redux/redux-store';
 import React from 'react';
 import {renderTree} from './render';
 
 
-store.subscribe(renderTree)
+store.subscribe(()=>{renderTree()})
 renderTree()
