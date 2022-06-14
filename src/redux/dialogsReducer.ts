@@ -63,13 +63,16 @@ export const dialogsReducer = (state:InitialDialogsStateType=initialDialogsState
                 message: action.postMessage,
                 foto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdDKH8Ew3p9hw0I9QKHFDP58aWZ-d6NUfHkA&usqp=CAU'
             }
-            state.messages.push(newMessage)
-            state.newMessageText = ''
-            return state
+            let stateCopy = {...state}
+            stateCopy.messages = [...state.messages]
+            stateCopy.messages.push(newMessage)
+            stateCopy.newMessageText = ''
+            return stateCopy
         }
         case 'UPDATE-NEW-MESSAGE-TEXT': {
-            state.newMessageText = action.newMessage
-            return state
+            let stateCopy = {...state}
+            stateCopy.newMessageText = action.newMessage
+            return stateCopy
         }
         default:
             return state

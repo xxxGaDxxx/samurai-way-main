@@ -1,7 +1,18 @@
-import {store} from './redux/redux-store';
 import React from 'react';
-import {renderTree} from './render';
+import ReactDOM from 'react-dom';
+import {BrowserRouter} from 'react-router-dom';
+import {Provider} from 'react-redux';
+import {store} from './redux/redux-store';
+import {App} from './App';
 
 
-store.subscribe(()=>{renderTree()})
-renderTree()
+    ReactDOM.render(
+        <BrowserRouter>
+            <Provider store={store}>
+                <App />  {/*store={store}*/}
+            </Provider>
+        </BrowserRouter>
+        , document.getElementById('root')
+    );
+
+

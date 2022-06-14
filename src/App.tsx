@@ -7,9 +7,9 @@ import {Route} from 'react-router-dom';
 import {Music} from './components/Music/Music';
 import {News} from './components/News/News';
 import {Settings} from './components/Settings/Settings';
-import {Friends} from './components/Friends/Friends';
-import { AppStoreType} from './redux/redux-store';
+
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
+import {FriendsContainer} from './components/Friends/FriendsContainer';
 
 
 
@@ -21,7 +21,7 @@ export const App= () => {
 
             <div className="app-wrapper">
                 <Heder/>
-                <Navbar />{/*friends={state.sidebarPage.friends}*/}
+                <Navbar/>{/*friends={state.sidebarPage.friends}*/}
                 <div className="app-wrapper-content">
                     <Route path={'/profile'}
                            render={() => <Profile />}/>
@@ -34,7 +34,7 @@ export const App= () => {
                     <Route path={'/settings'}
                            render={() => <Settings/>}/>
                     <Route path={'/friends'}
-                           render={() => <Friends/>}/>{/*friends={state.sidebarPage.friends}*/}
+                           render={() => <FriendsContainer/>}/>{/*friends={state.sidebarPage.friends}*/}
                 </div>
             </div>
     );

@@ -8,7 +8,7 @@ import {DialogsDataType, MessagesType} from '../../redux/TypeRedux';
 
 type DialogsPropsType = {
     onMessageNewChange:(body:string)=>void
-    addMessageNew:()=>void
+    addMessageNew:(postMessage: string)=>void
     newMessageText: string
     dialogsData: DialogsDataType[]
     messages: MessagesType[]
@@ -25,7 +25,7 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
 
     const onAddMessage = () => {
-        props.addMessageNew()
+        props.addMessageNew(props.newMessageText)
   /*      props.dispatch(addMewssageAC(props.newMessageText))*/
     }
 
