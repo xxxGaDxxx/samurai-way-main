@@ -1,39 +1,11 @@
 import React from 'react';
 import {MyPosts} from './MyPosts';
-
 import {addPostAC, onPostChangeAC} from '../../../redux/profileReducer';
 import {connect} from 'react-redux';
 import {AppStateType} from '../../../redux/redux-store';
 import {PostDataType} from '../../../redux/TypeRedux';
 import {Dispatch} from 'redux';
 
-
-
-
-/*
-type MyPostsPropsType = {
-    store: AppStoreType
-}
-*/
-/*export const MyPostsContainer=() => {
-const state = props.store.getState().profilePage
-
-    const addPost = () => {
-        props.store.dispatch(addPostAC(state.newPostText))
-    }
-
-    const onPostChange = (text:string) => {
-        props.store.dispatch(onPostChangeAC(text))
-    }
-
-
-    return (
-        <MyPosts onPostNewChange={onPostChange}
-                 addPost={addPost}
-                 newPostText={state.newPostText}
-                 postData={state.postData}/>
-    );
-};*/
 
 type mapStateToPropsType={
     newPostText:string
@@ -56,7 +28,7 @@ let mapDispatchToProps = (dispatch:Dispatch):mapDispatchToPropsType => {
             dispatch(onPostChangeAC(text))
         },
         addPost:(postPost: string)=>{
-            dispatch(addPostAC(postPost))/*dispatch.getState().newPostText*/
+            dispatch(addPostAC(postPost))
         },
     }
 }

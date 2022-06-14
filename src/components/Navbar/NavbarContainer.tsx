@@ -1,8 +1,8 @@
 import React from 'react';
 import {FriendsType} from '../../redux/TypeRedux';
-import {AppStateType} from '../../redux/redux-store';
 import {connect} from 'react-redux';
-import {Friends} from './Friends';
+import {Navbar} from './Navbar';
+import {AppStateType} from '../../redux/redux-store';
 
 
 type mapStateToPropsType = {
@@ -11,8 +11,9 @@ type mapStateToPropsType = {
 
 let mapStateToProps = (state: AppStateType): mapStateToPropsType => {
     return {
-        friends: state.sidebarPage.friends
+        friends:state.sidebarPage.friends
     }
 }
 
-export const FriendsContainer = connect(mapStateToProps)(Friends);
+
+export const NavbarContainer=connect(mapStateToProps)(Navbar)

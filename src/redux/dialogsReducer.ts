@@ -1,7 +1,7 @@
 import {ActionPropsType, DialogsDataType, MessagesType} from './TypeRedux';
 
 
-export type InitialDialogsStateType ={
+export type InitialDialogsStateType = {
     dialogsData: DialogsDataType[]
     messages: MessagesType[]
     newMessageText: string
@@ -54,7 +54,7 @@ let initialDialogsState = {
 }
 
 
-export const dialogsReducer = (state:InitialDialogsStateType=initialDialogsState, action: ActionPropsType):InitialDialogsStateType => {
+export const dialogsReducer = (state: InitialDialogsStateType = initialDialogsState, action: ActionPropsType): InitialDialogsStateType => {
     switch (action.type) {
         case 'ADD-MESSAGE': {
             const newMessage: MessagesType = {
@@ -63,16 +63,17 @@ export const dialogsReducer = (state:InitialDialogsStateType=initialDialogsState
                 message: action.postMessage,
                 foto: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdDKH8Ew3p9hw0I9QKHFDP58aWZ-d6NUfHkA&usqp=CAU'
             }
-            let stateCopy = {...state}
-            stateCopy.messages = [...state.messages]
-            stateCopy.messages.push(newMessage)
-            stateCopy.newMessageText = ''
-            return stateCopy
+            return {
+                ...state,
+                messages: [...state.messages, newMessage],
+                newMessageText: '',
+            }
         }
         case 'UPDATE-NEW-MESSAGE-TEXT': {
-            let stateCopy = {...state}
-            stateCopy.newMessageText = action.newMessage
-            return stateCopy
+            return {
+                ...state,
+                newMessageText: action.newMessage
+            }
         }
         default:
             return state
