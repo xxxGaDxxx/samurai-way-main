@@ -3,11 +3,14 @@ import {App} from './App';
 import {store} from './redux/redux-store';
 import React from 'react';
 import {BrowserRouter} from 'react-router-dom';
+import {Provider} from 'react-redux';
 
 export let renderTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App store={store}/>
+            <Provider store={store}>
+                <App />  {/*store={store}*/}
+            </Provider>
         </BrowserRouter>
         , document.getElementById('root')
     );

@@ -2,46 +2,46 @@ import {addPostAC, onPostChangeAC, profileReducer} from './profileReducer';
 import {addMewssageAC, dialogsReducer, onMessageChangeAC} from './dialogsReducer';
 import {sidebarReducer} from './sidebarReducer';
 
-export type PostDataType = {
+ type PostDataType = {
     id: number
     message: string
     likesCount: number
 }
-export type DialogsDataType = {
+ type DialogsDataType = {
     id: number
     name: string
     foto: string
 }
-export type MessagesType = {
+ type MessagesType = {
     id: number
     message: string
     foto: string
     name: string
 }
-export type FriendsType = {
+ type FriendsType = {
     id: number
     name: string
     foto: string
 }
-export type ProfilePagePropsType = {
+ type ProfilePagePropsType = {
     postData: PostDataType[]
     newPostText: string
 }
-export type DilogsPagePropsType = {
+ type DilogsPagePropsType = {
     dialogsData: DialogsDataType[]
     messages: MessagesType[]
     newMessageText: string
 }
-export type SidebarPropsType = {
+ type SidebarPropsType = {
     friends: FriendsType[]
 }
-export type StatePropsType = {
+ type StatePropsType = {
     profilePage: ProfilePagePropsType
     dialogsPage: DilogsPagePropsType
     sidebarPage: SidebarPropsType
 }
 
-export type StorePropsType = {
+ type StorePropsType = {
     _state: StatePropsType
     _callSubscriber: () => void
     subscribe: (observer: () => void) => void
@@ -50,13 +50,13 @@ export type StorePropsType = {
 }
 
 
-export type ActionPropsType =
+ type ActionPropsType =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof onPostChangeAC>
     | ReturnType<typeof addMewssageAC>
     | ReturnType<typeof onMessageChangeAC>
 
-export const store2: StorePropsType = {
+ const store2: StorePropsType = {
     _state: {
         profilePage: {
             postData: [

@@ -12,24 +12,21 @@ import { AppStoreType} from './redux/redux-store';
 import {DialogsContainer} from './components/Dialogs/DialogsContainer';
 
 
-type AppType = {
-    store: AppStoreType
-}
 
-export const App: React.FC<AppType> = (props) => {
-    let state = props.store.getState()
+export const App= () => {
+  /*  let state = props.store.getState()*/
 
 
     return (
 
             <div className="app-wrapper">
                 <Heder/>
-                <Navbar friends={state.sidebarPage.friends}/>
+                <Navbar />{/*friends={state.sidebarPage.friends}*/}
                 <div className="app-wrapper-content">
                     <Route path={'/profile'}
-                           render={() => <Profile store={props.store}/>}/>
+                           render={() => <Profile />}/>
                     <Route path={'/dialogs'}
-                           render={() => <DialogsContainer store={props.store}/>}/>
+                           render={() => <DialogsContainer />}/>
                     <Route path={'/news'}
                            render={() => <News/>}/>
                     <Route path={'/music'}
@@ -37,7 +34,7 @@ export const App: React.FC<AppType> = (props) => {
                     <Route path={'/settings'}
                            render={() => <Settings/>}/>
                     <Route path={'/friends'}
-                           render={() => <Friends friends={state.sidebarPage.friends}/>}/>
+                           render={() => <Friends/>}/>{/*friends={state.sidebarPage.friends}*/}
                 </div>
             </div>
     );

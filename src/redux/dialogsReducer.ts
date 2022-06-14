@@ -1,6 +1,7 @@
-import {ActionPropsType, DialogsDataType, MessagesType, } from './store2';
+import {ActionPropsType, DialogsDataType, MessagesType} from './TypeRedux';
 
-type initialDialogsStateType={
+
+export type InitialDialogsStateType ={
     dialogsData: DialogsDataType[]
     messages: MessagesType[]
     newMessageText: string
@@ -53,7 +54,7 @@ let initialDialogsState = {
 }
 
 
-export const dialogsReducer = (state:initialDialogsStateType=initialDialogsState, action: ActionPropsType):initialDialogsStateType => {
+export const dialogsReducer = (state:InitialDialogsStateType=initialDialogsState, action: ActionPropsType):InitialDialogsStateType => {
     switch (action.type) {
         case 'ADD-MESSAGE': {
             const newMessage: MessagesType = {

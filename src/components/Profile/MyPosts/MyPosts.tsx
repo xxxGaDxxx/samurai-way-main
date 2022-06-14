@@ -1,13 +1,14 @@
 import React, {ChangeEvent} from 'react';
 import s from './MyPosts.module.css'
 import {Post} from './Post/Post';
-import { PostDataType} from '../../../redux/store2';
+import {PostDataType} from '../../../redux/TypeRedux';
+
 
 
 
 type MyPostsPropsType = {
     onPostNewChange:(text:string)=>void
-    addPost:()=>void
+    addPost:(postPost: string)=>void
     newPostText: string
     postData: PostDataType[]
 
@@ -19,7 +20,7 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
     let postsElement = props.postData.map((p) => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     const onAddPost = () => {
-        props.addPost()
+        props.addPost(props.newPostText)
         /*props.dispatch(addPostAC(props.newPostText))*/
     }
 

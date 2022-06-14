@@ -1,11 +1,12 @@
-import {ActionPropsType, PostDataType} from './store2';
+import {ActionPropsType, PostDataType} from './TypeRedux';
 
-type initialProfileStateType={
+
+export type InitialProfileStateType ={
     postData: PostDataType[]
     newPostText: string
 }
 
-let initialPropfileState = {
+ let initialPropfileState = {
     postData: [
         {id: 1, message: 'НЕ СТАВИТЬ НОВЫЕ БИБЛИОТЕКИ!!!!', likesCount: 5},
         {id: 2, message: 'НЕ СТАВИТЬ НОВЫЕ БИБЛИОТЕКИ!!!!', likesCount: 15},
@@ -14,7 +15,7 @@ let initialPropfileState = {
     newPostText: '',
 }
 
-export const profileReducer = (state:initialProfileStateType =initialPropfileState, action: ActionPropsType):initialProfileStateType => {
+export const profileReducer = (state:InitialProfileStateType =initialPropfileState, action: ActionPropsType):InitialProfileStateType => {
     switch (action.type) {
         case 'ADD-POST': {
             const newPost: PostDataType = {

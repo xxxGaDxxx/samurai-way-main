@@ -1,4 +1,4 @@
-import {ActionPropsType, FriendsType} from './store2';
+import {ActionPropsType, FriendsType} from './TypeRedux';
 
 
 type initialDialogsStateType = {
