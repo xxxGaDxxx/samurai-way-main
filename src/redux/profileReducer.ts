@@ -1,5 +1,10 @@
-import {ActionPropsType, PostDataType} from './TypeRedux';
 
+
+export type PostDataType = {
+    id: number
+    message: string
+    likesCount: number
+}
 
 export type InitialProfileStateType = {
     postData: PostDataType[]
@@ -15,7 +20,7 @@ let initialProfileState = {
     newPostText: '',
 }
 
-export const profileReducer = (state: InitialProfileStateType = initialProfileState, action: ActionPropsType): InitialProfileStateType => {
+export const profileReducer = (state: InitialProfileStateType = initialProfileState, action: AddPostType): InitialProfileStateType => {
     switch (action.type) {
         case 'ADD-POST': {
             const newPost: PostDataType = {
@@ -40,6 +45,10 @@ export const profileReducer = (state: InitialProfileStateType = initialProfileSt
             return state
     }
 }
+
+export type AddPostType= ReturnType<typeof addPostAC>
+    | ReturnType<typeof onPostChangeAC>
+
 export const addPostAC = (postPost: string) => {
     return {
         type: 'ADD-POST',

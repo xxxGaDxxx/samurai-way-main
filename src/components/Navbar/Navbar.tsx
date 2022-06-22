@@ -32,7 +32,7 @@ export const Navbar:React.FC<FriendsPropsType>= (props) => {
             </div>
             <div className={s.item}>
                 <div>
-                    <NavLink to="/friends" activeClassName={s.active} >Friends</NavLink>
+                    <NavLink to="/users" activeClassName={s.active} >Friends</NavLink>
                     <div className={s.friends}>
                         {friendsElement}
                     </div>

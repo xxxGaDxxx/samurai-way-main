@@ -1,6 +1,17 @@
-import {ActionPropsType, DialogsDataType, MessagesType} from './TypeRedux';
 
 
+export type DialogsDataType = {
+    id: number
+    name: string
+    foto: string
+}
+
+export type MessagesType = {
+    id: number
+    message: string
+    foto: string
+    name: string
+}
 export type InitialDialogsStateType = {
     dialogsData: DialogsDataType[]
     messages: MessagesType[]
@@ -54,7 +65,7 @@ let initialDialogsState = {
 }
 
 
-export const dialogsReducer = (state: InitialDialogsStateType = initialDialogsState, action: ActionPropsType): InitialDialogsStateType => {
+export const dialogsReducer = (state: InitialDialogsStateType = initialDialogsState, action: AddMessage): InitialDialogsStateType => {
     switch (action.type) {
         case 'ADD-MESSAGE': {
             const newMessage: MessagesType = {
@@ -79,6 +90,10 @@ export const dialogsReducer = (state: InitialDialogsStateType = initialDialogsSt
             return state
     }
 }
+
+export type AddMessage= ReturnType<typeof addMewssageAC>
+    | ReturnType<typeof onMessageChangeAC>
+
 export const addMewssageAC = (postMessage: string) => {
     return {
         type: 'ADD-MESSAGE',

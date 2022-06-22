@@ -1,17 +1,17 @@
 import {addPostAC, onPostChangeAC} from './profileReducer';
 import {addMewssageAC, onMessageChangeAC} from './dialogsReducer';
 
-export type PostDataType = {
+ type PostDataType = {
     id: number
     message: string
     likesCount: number
 }
-export type DialogsDataType = {
+ type DialogsDataType = {
     id: number
     name: string
     foto: string
 }
-export type MessagesType = {
+ type MessagesType = {
     id: number
     message: string
     foto: string
@@ -49,7 +49,7 @@ export type StorePropsType = {
 }
 
 
-export type ActionPropsType =
+ type ActionPropsType =
     ReturnType<typeof addPostAC>
     | ReturnType<typeof onPostChangeAC>
     | ReturnType<typeof addMewssageAC>

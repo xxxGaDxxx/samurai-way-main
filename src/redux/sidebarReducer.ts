@@ -1,4 +1,4 @@
-import {ActionPropsType, FriendsType} from './TypeRedux';
+import { FriendsType} from './TypeRedux';
 
 
 type initialDialogsStateType = {
@@ -27,7 +27,7 @@ let initialDialogsState = {
 }
 
 
-export const sidebarReducer = (state: initialDialogsStateType = initialDialogsState, action: ActionPropsType): initialDialogsStateType => {
+export const sidebarReducer = (state: initialDialogsStateType = initialDialogsState, action: any): initialDialogsStateType => {
     switch (action.type) {
 
         default:
