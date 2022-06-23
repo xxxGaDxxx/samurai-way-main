@@ -5,12 +5,19 @@ type LocationType = {
 
 export type UsersType = {
     id: number
-    photoUrl:string
+    /*photoUrl:string*/
+    photo: PhotoType
     followed: boolean
-    fullName: string
+    name:string
+    /*fullName: string*/
     status: string
     location: LocationType
 }
+type PhotoType={
+    small: string
+    large: string
+}
+
 
 type InitialProfileStateType = {
     users: UsersType[]
