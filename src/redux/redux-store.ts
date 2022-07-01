@@ -8,10 +8,10 @@ let rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
     sidebarPage: sidebarReducer,
-    usersPage:usersReducer
+    usersPage: usersReducer
 })
 
-export type AppStoreType = typeof  store
+export type AppStoreType = typeof store
 export type AppStateType = ReturnType<typeof rootReducer>
 
 export let store = createStore(rootReducer)

@@ -5,15 +5,17 @@ type LocationType = {
 
 export type UsersType = {
     id: number
-    /*photoUrl:string*/
+    name: string
+    status: string
     photo: PhotoType
     followed: boolean
-    name:string
+
+
+    /*photoUrl:string*/
     /*fullName: string*/
-    status: string
     location: LocationType
 }
-type PhotoType={
+type PhotoType = {
     small: string
     large: string
 }
@@ -21,68 +23,53 @@ type PhotoType={
 
 type InitialProfileStateType = {
     users: UsersType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
 }
 
 
 let initialProfileState = {
-    users: [/*
-        {
-            id: 1,
-            photoUrl: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdDKH8Ew3p9hw0I9QKHFDP58aWZ-d6NUfHkA&usqp=CAU',
-            followed: false,
-            fullName: 'Wlad L.',
-            status: 'НЕ СТАВИТЬ НОВЫЕ БИБЛИОТЕКИ!!!!',
-            location: {citi: 'Ozery', contry: 'Belarus'}
-        },
-        {
-            id: 2,
-            photoUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGrTuyVvRpS-lz4Rg4jVaT9P7iKAx3T2vK5Q&usqp=CAU',
-            followed: false,
-            fullName: 'Margo B.',
-            status: 'НЕ СТАВИТЬ НОВЫЕ БИБЛИОТЕКИ!!!!',
-            location: {citi: 'Skidel', contry: 'Belarus'}
-        },
-        {
-            id: 3,
-            photoUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP5VKFOTn-2IxmSp9pcNC_B0PHDDvNQSAeVQ&usqp=CAU',
-            followed: true,
-            fullName: 'Radic R',
-            status: 'НЕ СТАВИТЬ НОВЫЕ БИБЛИОТЕКИ!!!!',
-            location: {citi: 'Grodno', contry: 'Belarus'}
-        },
-        {
-            id: 4,
-            photoUrl:'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1KjoRsUfR-lyCcHd4_fbLsIDGLrVQKB6Iug&usqp=CAU',
-            followed: true,
-            fullName: 'Pascha S.',
-            status: 'НЕ СТАВИТЬ НОВЫЕ БИБЛИОТЕКИ!!!!',
-            location: {citi: 'Ozery', contry: 'Belarus'}
-        },*/
-    ],
+    users: [],
+    pageSize: 100,
+    totalUsersCount: 0,
+    currentPage: 1,
 }
 
 
 export const usersReducer = (state: InitialProfileStateType = initialProfileState, action: FollowUnfollowType): InitialProfileStateType => {
     switch (action.type) {
-        case 'FOLLOW':{
-            return{
+        case 'FOLLOW': {
+            return {
                 ...state,
-                users:state.users.map(u=>u.id === action.userId ? {...u,followed: true}:u)
+                users: state.users.map(u => u.id === action.userId ? {...u, followed: true} : u)
             }
         }
-        case 'UN-FOLLOW':{
-            return{
+        case 'UN-FOLLOW': {
+            return {
                 ...state,
-                users:state.users.map(u=>u.id === action.userId ? {...u,followed: false}:u)
+                users: state.users.map(u => u.id === action.userId ? {...u, followed: false} : u)
             }
         }
-        case 'SET-USERS':{
+        case 'SET-USERS': {
             return {
                 ...state,
                 users: [
-                    ...state.users,
-                    ...action.users
+                    ...action.users,
+                    ...state.users
                 ]
+            }
+        }
+        case 'SET-CURRENT-PAGE': {
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        }
+        case 'SET-USERS-TOTAL-COUNT': {
+            return {
+                ...state,
+                totalUsersCount: action.totalCount
             }
         }
         default:
@@ -90,35 +77,56 @@ export const usersReducer = (state: InitialProfileStateType = initialProfileStat
     }
 }
 
-export type FollowUnfollowType = FollowACType | UnfollowACType |SetUserACType
+export type FollowUnfollowType =
+    FollowACType
+    | UnfollowACType
+    | SetUserACType
+    | SetCurrentPageACType
+    | SetUsersTotalUsersCountAC
 
 type FollowACType = ReturnType<typeof followAC>
 
-export const followAC = (userId:number) => {
+export const followAC = (userId: number) => {
     return {
         type: 'FOLLOW',
-        userId:userId
+        userId
     } as const
 }
 
 type UnfollowACType = ReturnType<typeof unfollowAC>
 
-export const unfollowAC = (userId:number) => {
+export const unfollowAC = (userId: number) => {
     return {
         type: 'UN-FOLLOW',
-        userId:userId
+        userId
     } as const
 }
 
 
 type SetUserACType = ReturnType<typeof setUserAC>
 
-export const setUserAC = (users:UsersType[]) => {
+export const setUserAC = (users: UsersType[]) => {
     return {
         type: 'SET-USERS',
-        users:users
+        users
     } as const
 }
 
+type SetCurrentPageACType = ReturnType<typeof setCurrentPageAC>
 
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: 'SET-CURRENT-PAGE',
+        currentPage
+    } as const
+}
+
+type SetUsersTotalUsersCountAC = ReturnType<typeof setUsersTotalUsersCountAC>
+
+export const setUsersTotalUsersCountAC = (totalCount: number) => {
+    return {
+        type: 'SET-USERS-TOTAL-COUNT',
+        totalCount
+    } as const
+}
 
