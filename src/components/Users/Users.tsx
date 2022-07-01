@@ -39,13 +39,14 @@ let Users:React.FC<UsersTypeProps> = (props) => {
         </div>
 
         {
-            props.users.map((u: UsersType) =>
-                <div key={u.id}>
+            props.users.map((u: UsersType) => {
+
+                return <div key={u.id}>
                             <span>
                                 <div>
 
                                     <img src={userPhoto}
-                                         alt={''}/> {/*u.photo.small !== null ? u.photo.small :userPhoto*/}
+                                         alt={'wwww'}/> {/*u.photo.small !== null ? u.photo.small :userPhoto*/}
                                 </div>
                                 <div>
                                     {
@@ -70,7 +71,8 @@ let Users:React.FC<UsersTypeProps> = (props) => {
                                     <div>{'u.location.citi'}</div>
                                 </span>
                             </span>
-                </div>)
+                </div>
+            })
         }
     </div>
 }
