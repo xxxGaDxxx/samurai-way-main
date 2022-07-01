@@ -26,6 +26,7 @@ type InitialProfileStateType = {
     pageSize: number
     totalUsersCount: number
     currentPage: number
+    isFetching: boolean
 }
 
 
@@ -34,6 +35,7 @@ let initialProfileState = {
     pageSize: 100,
     totalUsersCount: 0,
     currentPage: 1,
+    isFetching: false,
 }
 
 
@@ -72,6 +74,11 @@ export const usersReducer = (state: InitialProfileStateType = initialProfileStat
                 totalUsersCount: action.totalCount
             }
         }
+        case 'TOGGLE-IS-FETCHING':
+            return {
+                ...state,
+                isFetching: action.isFetching
+            }
         default:
             return state
     }
@@ -83,6 +90,7 @@ export type FollowUnfollowType =
     | SetUserACType
     | SetCurrentPageACType
     | SetUsersTotalUsersCountAC
+    | ToggleIsFetchingAC
 
 type FollowACType = ReturnType<typeof followAC>
 
@@ -127,6 +135,15 @@ export const setUsersTotalUsersCountAC = (totalCount: number) => {
     return {
         type: 'SET-USERS-TOTAL-COUNT',
         totalCount
+    } as const
+}
+
+type ToggleIsFetchingAC = ReturnType<typeof toggleIsFetchingAC>
+
+export const toggleIsFetchingAC = (isFetching: boolean) => {
+    return {
+        type: 'TOGGLE-IS-FETCHING',
+        isFetching
     } as const
 }
 

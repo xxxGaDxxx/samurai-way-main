@@ -11,6 +11,7 @@ type UsersTypeProps = {
     unfollow: (userId: number) => void
     follow: (userId: number) => void
     onPageChanged:(pageNumber: number) =>void
+
 }
 
 
