@@ -7,7 +7,7 @@ export type UsersType = {
     id: number
     name: string
     status: string
-    photo: PhotoType
+    photos: PhotosType
     followed: boolean
 
 
@@ -15,7 +15,7 @@ export type UsersType = {
     /*fullName: string*/
     location: LocationType
 }
-type PhotoType = {
+export type PhotosType = {
     small: string
     large: string
 }
