@@ -9,9 +9,9 @@ import {
 } from '../../redux/usersReducer';
 import {AppStateType} from '../../redux/redux-store';
 import React from 'react';
-import axios from 'axios';
 import Users from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
+import {usersAPI} from '../../api/api';
 
 
 type MapStateToPropsType = {
@@ -23,7 +23,7 @@ type MapStateToPropsType = {
 }
 
 
-type UsersPropsType = {
+export type UsersPropsType = {
     users: UsersType[]
     follow: (userId: number) => void
     unfollow: (userId: number) => void
@@ -41,25 +41,32 @@ type UsersPropsType = {
 
 class UsersAPIContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
-        this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.toggleIsFetching(false)
-                this.props.setUser(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
 
-            })
+        this.props.toggleIsFetching(true)
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{
+        //     withCredentials:true
+        // })
+        usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
+            debugger
+
+            this.props.toggleIsFetching(false)
+            this.props.setUser(data.items)
+            this.props.setTotalUsersCount(data.totalCount)
+
+        })
     }
 
     onPageChanged = (pageNumber: number) => {
         this.props.setCurrentPage(pageNumber)
         this.props.toggleIsFetching(true)
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
-            .then(response => {
-                this.props.toggleIsFetching(false)
-                this.props.setUser(response.data.items)
+        // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{
+        //     withCredentials:true
+        // })
+        usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
+            this.props.toggleIsFetching(false)
+            this.props.setUser(data.items)
 
-            })
+        })
     }
 
     render() {
