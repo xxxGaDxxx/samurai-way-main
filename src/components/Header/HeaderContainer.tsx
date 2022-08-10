@@ -35,7 +35,6 @@ class HeaderContainer extends React.Component<PropsType> {
         // })
         headersAPI.getHeader().then(data => {
                 if (data.resultCode === 0) {
-                    debugger
                     let {id, login, email} = data.data
                     this.props.setAuthUserDate(id, login, email)
                 }
