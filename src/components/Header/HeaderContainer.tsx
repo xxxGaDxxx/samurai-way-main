@@ -1,11 +1,9 @@
 import React from 'react';
 import {Header} from './Header';
-
 import {connect} from 'react-redux';
-import { setAuthUserDate} from '../../redux/authReducer';
+import {getAuthUserDate} from '../../redux/authReducer';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {AppStateType} from '../../redux/redux-store';
-import {headersAPI} from '../../api/api';
 
 
 type MapStateToPropsType = {
@@ -15,7 +13,7 @@ type MapStateToPropsType = {
     isAuth: boolean
 }
 type MapDispatchToPropsType = {
-    setAuthUserDate: (id: number, login: string, email: string) => void
+    getAuthUserDate: () => void
 }
 
 type PathParamsType = {
@@ -30,15 +28,7 @@ type PropsType = RouteComponentProps<PathParamsType> & HeaderContainerPropsType
 class HeaderContainer extends React.Component<PropsType> {
 
     componentDidMount() {
-        // axios.get(`https://social-network.samuraijs.com/api/1.0/auth/me`, {
-        //     withCredentials: true
-        // })
-        headersAPI.getHeader().then(data => {
-                if (data.resultCode === 0) {
-                    let {id, login, email} = data.data
-                    this.props.setAuthUserDate(id, login, email)
-                }
-            })
+        this.props.getAuthUserDate()
     }
 
     render() {
@@ -61,4 +51,4 @@ let mapStateToProps = (state: AppStateType) :MapStateToPropsType=> {
 
 let WithUrlDataContainerComponent = withRouter(HeaderContainer);
 
-export default connect(mapStateToProps, {setAuthUserDate})(WithUrlDataContainerComponent)
+export default connect(mapStateToProps, {getAuthUserDate})(WithUrlDataContainerComponent)

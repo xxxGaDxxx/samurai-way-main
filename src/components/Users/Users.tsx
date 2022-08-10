@@ -33,7 +33,7 @@ let Users: React.FC<UsersTypeProps> = (props) => {
         <div>
             {peges.map(p => {
 
-                return <span className={props.currentPage === p ? s.selectedPage : ''}
+                return <span key={Math.random()} className={props.currentPage === p ? s.selectedPage : ''}
                              onClick={() => props.onPageChanged(p)}>{p}</span>
 
             })}

@@ -1,3 +1,5 @@
+import {authAPI} from '../api/api';
+
 export type DatePropsType = {
     id: number | null
     login: string | null
@@ -58,4 +60,15 @@ export const setAuthUserDate = (userId: number, login: string, email: string) =>
             email,
         }
     } as const
+}
+
+export const getAuthUserDate = () => {
+    return (dispatch:any)=>{
+        authAPI.me().then(data => {
+            if (data.resultCode === 0) {
+                let {id, login, email} = data.data
+                dispatch(setAuthUserDate(id, login, email))
+            }
+        })
+    }
 }

@@ -1,4 +1,5 @@
 import {PhotosType} from './usersReducer';
+import {usersAPI} from '../api/api';
 
 export type PostDataType = {
     id: number
@@ -118,6 +119,16 @@ export const setUserProfile = (profile: any) => {
         type: 'SET-USER-PROFILE',
         profile
     } as const
+}
+
+
+export const getUserProfile = (userId:number) => {
+    return (dispatch :any)=>{
+        usersAPI.getProfile(userId)
+            .then(data => {
+                dispatch(setUserProfile(data))
+            })
+    }
 }
 
 

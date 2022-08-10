@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let instanceUsers = axios.create({
+let instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
     headers: {
@@ -10,39 +10,47 @@ let instanceUsers = axios.create({
 
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
-        return instanceUsers.get(`users?page=${currentPage}&count=${pageSize}`,)
+        return instance.get(`users?page=${currentPage}&count=${pageSize}`,)
             .then(response => response.data)//что бы не передовать весь респонс педедаём после запроса дата
     },
     unfollow(userId: number) {
-        return instanceUsers.delete(`https://social-network.samuraijs.com/api/1.0//follow/${userId}`)
+        return instance.delete(`follow/${userId}`)
 
     },
     follow(userId: number) {
-        return instanceUsers.post(`https://social-network.samuraijs.com/api/1.0//follow/${userId}`, {}, {
-            withCredentials: true,
-
-        })
-    }
-}
-
-
-let instanceHeaderProfile = axios.create({
-    baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-    withCredentials: true,
-})
-
-export const headersAPI = {
-    getHeader() {
-        return instanceHeaderProfile.get(`auth/me`)
+        return instance.post(`follow/${userId}`)
+    },
+    getProfile(userId: number) {
+        return instance.get(`profile/` + userId)
             .then(response => response.data)
-    }
+    },
 }
 
-export const profileAPI = {
-    getProfile(userId: string) {
-        return instanceHeaderProfile.get(`profile/` + userId)
+export const authAPI = {
+    me() {
+        return instance.get(`auth/me`)
             .then(response => response.data)
-    }
+    },
 }
+
+
+// let instanceHeaderProfile = axios.create({
+//     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
+//     withCredentials: true,
+// })
+//
+// export const headersAPI = {
+//     getHeader() {
+//         return instanceHeaderProfile.get(`auth/me`)
+//             .then(response => response.data)
+//     }
+// }
+//
+// export const profileAPI = {
+//     getProfile(userId: string) {
+//         return instanceHeaderProfile.get(`profile/` + userId)
+//             .then(response => response.data)
+//     }
+// }
 
 
