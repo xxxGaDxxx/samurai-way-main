@@ -1,4 +1,5 @@
 import {authAPI} from '../api/api';
+import {Dispatch} from 'redux';
 
 export type DatePropsType = {
     id: number | null
@@ -63,7 +64,7 @@ export const setAuthUserDate = (userId: number, login: string, email: string) =>
 }
 
 export const getAuthUserDate = () => {
-    return (dispatch:any)=>{
+    return (dispatch: Dispatch<AuthUserDateType>) => {
         authAPI.me().then(data => {
             if (data.resultCode === 0) {
                 let {id, login, email} = data.data

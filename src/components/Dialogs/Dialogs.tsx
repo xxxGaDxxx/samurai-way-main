@@ -3,7 +3,6 @@ import s from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogsItem';
 import {Message} from './Message/Message';
 import {DialogsDataType, MessagesType} from '../../redux/dialogsReducer';
-import {Redirect} from 'react-router-dom';
 
 
 type DialogsPropsType = {
@@ -12,16 +11,12 @@ type DialogsPropsType = {
     newMessageText: string
     dialogsData: DialogsDataType[]
     messages: MessagesType[]
-    isAuth: boolean
-
 }
 
 export const Dialogs: React.FC<DialogsPropsType> = (props) => {
 
     let dialogsElemets = props.dialogsData.map((d) => <DialogItem name={d.name} key={d.id} id={d.id} foto={d.foto}/>)
-    let messagesElemets = props.messages.map((m) => <Message message={m.message} key={m.id} name={m.name}
-                                                             foto={m.foto}/>)
-
+    let messagesElemets = props.messages.map((m) => <Message message={m.message} key={m.id} name={m.name} foto={m.foto}/>)
 
     const onAddMessage = () => {
         props.addMessageNew(props.newMessageText)
@@ -32,8 +27,6 @@ export const Dialogs: React.FC<DialogsPropsType> = (props) => {
         let body = e.currentTarget.value
         props.onMessageNewChange(body)
     }
-
-    if (!props.isAuth) return <Redirect to={'/login'}/>
 
     return (
         <div className={s.dialogs}>

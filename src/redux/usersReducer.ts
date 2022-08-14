@@ -1,4 +1,7 @@
 import {usersAPI} from '../api/api';
+import {AppStateType} from './redux-store';
+import {Dispatch} from 'redux';
+import {ThunkAction} from 'redux-thunk';
 
 type LocationType = {
     citi: string
@@ -161,8 +164,8 @@ export const toggleIsFollowingProgress = (isFetching: boolean, userId: number) =
 }
 
 
-export const getUserThunkCreator = (currentPage: number, pageSize: number) => {
-    return (dispatch: any) => {
+export const getUserThunkCreator = (currentPage: number, pageSize: number): ThunkAction<Promise<void>, AppStateType, unknown, FollowUnfollowType> => {
+    return async (dispatch, getState) => {
         dispatch(toggleIsFetching(true))
         usersAPI.getUsers(currentPage, pageSize).then(data => {
             dispatch(toggleIsFetching(false))
@@ -172,8 +175,12 @@ export const getUserThunkCreator = (currentPage: number, pageSize: number) => {
         })
     }
 }
+
+
+type DispatchType = Dispatch<FollowUnfollowType>
+
 export const follow = (userId: number) => {
-    return (dispatch: any) => {
+    return (dispatch: DispatchType,) => {
         dispatch(toggleIsFollowingProgress(true, userId))
         usersAPI.follow(userId)
             .then(response => {
@@ -185,7 +192,7 @@ export const follow = (userId: number) => {
     }
 }
 export const unfollow = (userId: number) => {
-    return (dispatch: any) => {
+    return (dispatch: DispatchType) => {
         dispatch(toggleIsFollowingProgress(true, userId))
 
         usersAPI.unfollow(userId)
