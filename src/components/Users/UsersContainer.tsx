@@ -3,12 +3,18 @@ import {
     followSuccess,
     setCurrentPage,
     unfollowSuccess,
-    UsersType, toggleIsFollowingProgress, getUserThunkCreator, follow, unfollow
+    UsersType,
+    toggleIsFollowingProgress,
+    getUserThunkCreator,
+    follow,
+    unfollow
 } from '../../redux/usersReducer';
 import {AppStateType} from '../../redux/redux-store';
-import React from 'react';
+import React, {ComponentType} from 'react';
 import Users from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
+import {compose} from 'redux';
+import {withAuthRedirect} from '../../Hoc/withAuthRedirect';
 
 
 type MapStateToPropsType = {
@@ -109,13 +115,26 @@ let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     }
 }
 
+export default compose<ComponentType>(
+    withAuthRedirect,
+    connect(mapStateToProps, {
+        followSuccess,
+        unfollowSuccess,
+        setCurrentPage,
+        toggleIsFollowingProgress,
+        getUserThunkCreator,
+        follow,
+        unfollow,
+    }),
+)(UsersAPIContainer)
 
-export const UsersContainer = connect(mapStateToProps, {
-    followSuccess,
-    unfollowSuccess,
-    setCurrentPage,
-    toggleIsFollowingProgress,
-    getUserThunkCreator,
-    follow,
-    unfollow,
-})(UsersAPIContainer);
+
+// export const UsersContainer = connect(mapStateToProps, {
+//     followSuccess,
+//     unfollowSuccess,
+//     setCurrentPage,
+//     toggleIsFollowingProgress,
+//     getUserThunkCreator,
+//     follow,
+//     unfollow,
+// })(UsersAPIContainer);
