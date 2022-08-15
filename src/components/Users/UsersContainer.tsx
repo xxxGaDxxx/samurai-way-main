@@ -104,7 +104,6 @@ class UsersAPIContainer extends React.Component<UsersPropsType> {
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    console.log(state.usersPage.followingInProgress)
     return {
         users: state.usersPage.users,
         pageSize: state.usersPage.pageSize,

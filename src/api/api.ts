@@ -21,8 +21,8 @@ export const usersAPI = {
         return instance.post(`follow/${userId}`)
     },
     getProfile(userId: number) {
-        return instance.get(`profile/` + userId)
-            .then(response => response.data)
+        console.warn('Obsolete metod. Please profileAPI obj.')
+        return profileAPI.getProfile(userId)
     },
 }
 
@@ -33,6 +33,24 @@ export const authAPI = {
     },
 }
 
+
+export const profileAPI = {
+
+    getProfile(userId: number) {
+        return instance.get(`profile/${userId}`)
+
+    },
+    getStatus(userId: number) {
+        return instance.get('profile/status/' + userId)
+
+
+    },
+    updateStatus(status: string) {
+        return instance.put(`profile/status`, {status: status})
+
+    }
+
+}
 
 // let instanceHeaderProfile = axios.create({
 //     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
