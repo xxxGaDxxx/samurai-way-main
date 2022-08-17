@@ -52,23 +52,17 @@ export const profileAPI = {
 
 }
 
-// let instanceHeaderProfile = axios.create({
-//     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
-//     withCredentials: true,
-// })
-//
-// export const headersAPI = {
-//     getHeader() {
-//         return instanceHeaderProfile.get(`auth/me`)
-//             .then(response => response.data)
-//     }
-// }
-//
-// export const profileAPI = {
-//     getProfile(userId: string) {
-//         return instanceHeaderProfile.get(`profile/` + userId)
-//             .then(response => response.data)
-//     }
-// }
+type LoginAPIType = {
+    email: string
+    password: string
+    rememberMe: boolean
+    captcha: boolean
+}
 
+export const loginAPI = {
+    loginMe(loginProperties: LoginAPIType) {
+        return instance.post(`auth/login`)
+    },
+
+}
 

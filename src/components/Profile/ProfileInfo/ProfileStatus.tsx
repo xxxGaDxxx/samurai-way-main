@@ -3,11 +3,9 @@ import React, {ChangeEvent} from 'react';
 type ProfileStatustype = {
     status: string,
     updateStatus: (status: string) => void
-
 }
 
 class ProfileStatus extends React.Component<ProfileStatustype> {
-
 
     state = {
         editeMode: false,
@@ -25,20 +23,26 @@ class ProfileStatus extends React.Component<ProfileStatustype> {
         this.props.updateStatus(this.state.status)
     }
 
-    onStatusChange=(e: ChangeEvent<HTMLInputElement>)=> {
+    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
 
         this.setState({
             status: e.currentTarget.value
         })
     }
 
+    componentDidUpdate(prevProps: Readonly<ProfileStatustype>, prevState: Readonly<{}>, snapshot?: any) {
+
+        if (prevProps.status !== this.props.status) {
+            this.setState({status: this.props.status})
+        }
+    }
 
     render() {
         return (
             <div>
                 {!this.state.editeMode
                     ? <div>
-                        <span onDoubleClick={this.activateEditeMode}>{this.props.status || 'no status' }</span>
+                        <span onDoubleClick={this.activateEditeMode}>{this.props.status || 'no status'}</span>
                     </div>
                     : <div>
                         <input onChange={this.onStatusChange} value={this.state.status}

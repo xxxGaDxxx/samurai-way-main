@@ -16,7 +16,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
     if (!props.profile) {
         return <Preloader/>
     }
-    console.log(props.profile)
+    console.log(props.profile.photos)
     return (
         <div>
             {/*<div>*/}
