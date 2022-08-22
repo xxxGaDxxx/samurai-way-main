@@ -77,35 +77,35 @@ export const dialogsReducer = (state: InitialDialogsStateType = initialDialogsSt
             return {
                 ...state,
                 messages: [...state.messages, newMessage],
-                newMessageText: '',
+
             }
         }
-        case 'UPDATE-NEW-MESSAGE-TEXT': {
-            return {
-                ...state,
-                newMessageText: action.newMessage
-            }
-        }
+        // case 'UPDATE-NEW-MESSAGE-TEXT': {
+        //     return {
+        //         ...state,
+        //         newMessageText: action.newMessage
+        //     }
+        // }
         default:
             return state
     }
 }
 
-export type AddMessage= ReturnType<typeof addMewssageAC>
-    | ReturnType<typeof onMessageChangeAC>
+export type AddMessage= ReturnType<typeof sendMessageAC>
+    // | ReturnType<typeof onMessageChangeAC>
 
-export const addMewssageAC = (postMessage: string) => {
+export const sendMessageAC = (newMessageBody: string) => {
     return {
         type: 'ADD-MESSAGE',
-        postMessage: postMessage
+        postMessage:newMessageBody
     } as const
 }
-export const onMessageChangeAC = (newMessage: string) => {
-    return {
-        type: 'UPDATE-NEW-MESSAGE-TEXT',
-        newMessage: newMessage
-    } as const
-}
+// export const onMessageChangeAC = (newMessageBody: string) => {
+//     return {
+//         type: 'UPDATE-NEW-MESSAGE-TEXT',
+//         newMessage: newMessageBody
+//     } as const
+// }
 
 
 

@@ -1,6 +1,6 @@
-import {addPostAC, onPostChangeAC, profileReducer} from './profileReducer';
-import {addMewssageAC, dialogsReducer, onMessageChangeAC} from './dialogsReducer';
-import {sidebarReducer} from './sidebarReducer';
+import {addPostAC} from './profileReducer';
+import {sendMessageAC} from './dialogsReducer';
+
 
  type PostDataType = {
     id: number
@@ -52,9 +52,9 @@ import {sidebarReducer} from './sidebarReducer';
 
  type ActionPropsType =
     ReturnType<typeof addPostAC>
-    | ReturnType<typeof onPostChangeAC>
-    | ReturnType<typeof addMewssageAC>
-    | ReturnType<typeof onMessageChangeAC>
+    // | ReturnType<typeof onPostChangeAC>
+    | ReturnType<typeof sendMessageAC>
+    // | ReturnType<typeof onMessageChangeAC>
 
  const store2: StorePropsType = {
     _state: {

@@ -33,7 +33,6 @@ export type ProfileDaTaType = {
 
 export type InitialProfileStateType = {
     postData: PostDataType[]
-    newPostText: string
     profile: ProfileDaTaType
     status: string
 }
@@ -44,7 +43,6 @@ let initialProfileState: InitialProfileStateType = {
         {id: 2, message: 'НЕ СТАВИТЬ НОВЫЕ БИБЛИОТЕКИ!!!!', likesCount: 15},
 
     ],
-    newPostText: '',
     profile: {
         aboutMe: '---------',
         contacts: {
@@ -74,20 +72,12 @@ export const profileReducer = (state = initialProfileState, action: AddPostType)
         case 'ADD-POST': {
             const newPost: PostDataType = {
                 id: 5,
-                message: action.postPost,
+                message: action.newPostText,
                 likesCount: 0,
             }
             return {
                 ...state,
                 postData: [...state.postData, newPost],
-                newPostText: '',
-
-            }
-        }
-        case 'UPDATE-NEW-POST-TEXT': {
-            return {
-                ...state,
-                newPostText: action.newText,
             }
         }
         case 'SET-USER-PROFILE': {
@@ -107,20 +97,14 @@ export const profileReducer = (state = initialProfileState, action: AddPostType)
 }
 
 export type AddPostType = ReturnType<typeof addPostAC>
-    | ReturnType<typeof onPostChangeAC>
+    // | ReturnType<typeof onPostChangeAC>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setStatus>
 
-export const addPostAC = (postPost: string) => {
+export const addPostAC = (newPostText: string) => {
     return {
         type: 'ADD-POST',
-        postPost: postPost
-    } as const
-}
-export const onPostChangeAC = (newText: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: newText
+        newPostText: newPostText
     } as const
 }
 
@@ -137,7 +121,6 @@ export const setStatus = (status: string) => {
         status
     } as const
 }
-
 
 export const getUserProfile = (userId: number) => {
     return (dispatch: Dispatch<AddPostType>) => {

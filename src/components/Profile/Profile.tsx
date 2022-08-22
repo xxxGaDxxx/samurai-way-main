@@ -1,12 +1,12 @@
 import React from 'react';
 import {ProfileInfo} from './ProfileInfo/ProfileInfo';
-import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 import {ProfileDaTaType} from '../../redux/profileReducer';
+import {MyPostsContainer} from './MyPosts/MyPostsContainer';
 
 type ProfilePropsType = {
     profile: ProfileDaTaType
-    status:string
-    updateStatus:(status:string)=>void
+    status: string
+    updateStatus: (status: string) => void
 }
 
 export const Profile: React.FC<ProfilePropsType> = (props) => {
