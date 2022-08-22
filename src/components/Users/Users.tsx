@@ -1,15 +1,15 @@
 import React from 'react';
 import s from './Users.module.css';
-import {UsersType} from '../../redux/usersReducer';
 import userPhoto from '../../assets/img/user.jpg';
 import {NavLink} from 'react-router-dom';
+import {ItemsUsersType} from '../../api/api';
 
 
 type UsersTypeProps = {
     totalUsersCount: number
     pageSize: number
     currentPage: number
-    users: UsersType[]
+    users: ItemsUsersType[]
     unfollow: (userId: number) => void
     follow: (userId: number) => void
     onPageChanged: (pageNumber: number) => void

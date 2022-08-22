@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 let instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
@@ -8,17 +9,20 @@ let instance = axios.create({
     },
 })
 
+
 export const usersAPI = {
     getUsers(currentPage: number, pageSize: number) {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`,)
-            .then(response => response.data)//что бы не передовать весь респонс педедаём после запроса дата
+        return instance.get<UserApiResponseType>(`users?page=${currentPage}&count=${pageSize}`,)
+            .then(response => {
+                return response.data
+            })//что бы не передовать весь респонс педедаём после запроса дата
     },
     unfollow(userId: number) {
-        return instance.delete(`follow/${userId}`)
+        return instance.delete<ResponseLoginFollowType>(`follow/${userId}`)
 
     },
     follow(userId: number) {
-        return instance.post(`follow/${userId}`)
+        return instance.post<ResponseLoginFollowType>(`follow/${userId}`)
     },
     getProfile(userId: number) {
         console.warn('Obsolete metod. Please profileAPI obj.')
@@ -26,43 +30,91 @@ export const usersAPI = {
     },
 }
 
+
 export const authAPI = {
     me() {
-        return instance.get(`auth/me`)
-            .then(response => response.data)
+        return instance.get<LoginResponseType>(`auth/me`)
     },
+    login(email: string, password: string, rememberMe = false) {
+        return instance.post<ResponseLoginFollowType<{ userId: number }>>(`auth/login`, {email, password, rememberMe})
+    },
+    logout() {
+        return instance.delete(`auth/login`)
+    }
 }
 
 
 export const profileAPI = {
-
     getProfile(userId: number) {
-        return instance.get(`profile/${userId}`)
-
+        return instance.get<ProfileUserStatusType>(`profile/${userId}`)
     },
     getStatus(userId: number) {
-        return instance.get('profile/status/' + userId)
-
-
+        return instance.get<string | null>('profile/status/' + userId)
     },
     updateStatus(status: string) {
-        return instance.put(`profile/status`, {status: status})
-
+        return instance.put<ResponseLoginFollowType>(`profile/status`, {status: status})
     }
-
 }
 
-type LoginAPIType = {
-    email: string
-    password: string
-    rememberMe: boolean
-    captcha: boolean
+
+export type UserApiResponseType = {
+    items: ItemsUsersType[]
+    totalCount: number
+    error: string | null
 }
 
-export const loginAPI = {
-    loginMe(loginProperties: LoginAPIType) {
-        return instance.post(`auth/login`)
-    },
-
+export type ItemsUsersType = {
+    name: string
+    id: number
+    uniqueUrlName: null
+    photos: {
+        small: string | null
+        large: string | null
+    }
+    status: string | null
+    followed: boolean
 }
 
+export type ResponseLoginFollowType<D = {}> = {
+    data: D
+    messages: string[]
+    fieldsErrors: string[]
+    resultCode: number
+}
+
+export type LoginResponseType = {
+    data: {
+        id: number
+        login: string
+        email: string
+    }
+    messages: string[]
+    fieldsErrors: string[]
+    resultCode: number
+}
+
+export type ProfileUserStatusType = {
+    aboutMe: string | null
+    contacts: SocialNetworks
+    lookingForAJob: boolean
+    lookingForAJobDescription: string | null
+    fullName: string
+    userId: number
+    photos: PhotosType
+}
+
+export type SocialNetworks = {
+    facebook: string | null
+    website: string | null
+    vk: string | null
+    twitter: string | null
+    instagram: string | null
+    youtube: string | null
+    github: string | null
+    mainLink: string | null
+}
+
+export type PhotosType = {
+    small: string | null
+    large: string | null
+}

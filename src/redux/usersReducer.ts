@@ -1,25 +1,25 @@
-import {usersAPI} from '../api/api';
-import {AppStateType} from './redux-store';
+import {ItemsUsersType, usersAPI} from '../api/api';
+import {AppStateType, AppThunk} from './redux-store';
 import {Dispatch} from 'redux';
 import {ThunkAction} from 'redux-thunk';
 
-type LocationType = {
-    citi: string
-    contry: string
-}
+// type LocationType = {
+//     citi: string
+//     contry: string
+// }
 
-export type UsersType = {
-    id: number
-    name: string
-    status: string
-    photos: PhotosType
-    followed: boolean
-
-
-    /*photoUrl:string*/
-    /*fullName: string*/
-    location: LocationType
-}
+// export type UsersType = {
+//     id: number
+//     name: string
+//     status: string
+//     photos: PhotosType
+//     followed: boolean
+//
+//
+//     /*photoUrl:string*/
+//     /*fullName: string*/
+//     location: LocationType
+// }
 export type PhotosType = {
     small: string
     large: string
@@ -27,7 +27,7 @@ export type PhotosType = {
 
 
 type InitialProfileStateType = {
-    users: UsersType[]
+    users: ItemsUsersType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
@@ -123,7 +123,7 @@ export const unfollowSuccess = (userId: number) => {
 
 
 type SetUserACType = ReturnType<typeof setUser>
-export const setUser = (users: UsersType[]) => {
+export const setUser = (users: ItemsUsersType[]) => {
     return {
         type: 'SET-USERS',
         users
@@ -164,44 +164,35 @@ export const toggleIsFollowingProgress = (isFetching: boolean, userId: number) =
 }
 
 
-export const getUserThunkCreator = (currentPage: number, pageSize: number): ThunkAction<Promise<void>, AppStateType, unknown, FollowUnfollowType> => {
-    return async (dispatch, getState) => {
-        dispatch(toggleIsFetching(true))
-        usersAPI.getUsers(currentPage, pageSize).then(data => {
-            dispatch(toggleIsFetching(false))
-            dispatch(setUser(data.items))
-            dispatch(setTotalUsersCount(data.totalCount))
+export const getUserThunkCreator = (currentPage: number, pageSize: number): ThunkAction<Promise<void>, AppStateType, unknown, FollowUnfollowType> => async (dispatch) => {
+    dispatch(toggleIsFetching(true))
+    usersAPI.getUsers(currentPage, pageSize).then(data => {
+        dispatch(toggleIsFetching(false))
+        dispatch(setUser(data.items))
+        dispatch(setTotalUsersCount(data.totalCount))
+    })
+}
 
+export const follow = (userId: number): AppThunk => (dispatch) => {
+    dispatch(toggleIsFollowingProgress(true, userId))
+    usersAPI.follow(userId)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(followSuccess(userId))
+            }
+            dispatch(toggleIsFollowingProgress(false, userId))
         })
-    }
+
 }
+export const unfollow = (userId: number): AppThunk => (dispatch) => {
+    dispatch(toggleIsFollowingProgress(true, userId))
 
-
-type DispatchType = Dispatch<FollowUnfollowType>
-
-export const follow = (userId: number) => {
-    return (dispatch: DispatchType,) => {
-        dispatch(toggleIsFollowingProgress(true, userId))
-        usersAPI.follow(userId)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(followSuccess(userId))
-                }
-                dispatch(toggleIsFollowingProgress(false, userId))
-            })
-    }
-}
-export const unfollow = (userId: number) => {
-    return (dispatch: DispatchType) => {
-        dispatch(toggleIsFollowingProgress(true, userId))
-
-        usersAPI.unfollow(userId)
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    dispatch(unfollowSuccess(userId))
-                }
-                dispatch(toggleIsFollowingProgress(false, userId))
-            })
-    }
+    usersAPI.unfollow(userId)
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                dispatch(unfollowSuccess(userId))
+            }
+            dispatch(toggleIsFollowingProgress(false, userId))
+        })
 }
 

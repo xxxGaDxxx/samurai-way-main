@@ -1,5 +1,4 @@
-import {PhotosType} from './usersReducer';
-import {profileAPI} from '../api/api';
+import {profileAPI, ProfileUserStatusType} from '../api/api';
 import {Dispatch} from 'redux';
 
 
@@ -9,32 +8,32 @@ export type PostDataType = {
     likesCount: number
 }
 
-type ContactsType = {
-    'facebook': string
-    'website': null
-    'vk': string
-    'twitter': string
-    'instagram': string
-    'youtube': null
-    'github': string
-    'mainLink': null
-}
+// type ContactsType = {
+//     'facebook': string
+//     'website': null
+//     'vk': string
+//     'twitter': string
+//     'instagram': string
+//     'youtube': null
+//     'github': string
+//     'mainLink': null
+// }
 
 
-export type ProfileDaTaType = {
-    aboutMe: string
-    contacts: ContactsType
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    userId: number
-    photos: PhotosType
-}
+// export type ProfileDaTaType = {
+//     aboutMe: string
+//     contacts: ContactsType
+//     lookingForAJob: boolean
+//     lookingForAJobDescription: string
+//     fullName: string
+//     userId: number
+//     photos: PhotosType
+// }
 
 export type InitialProfileStateType = {
     postData: PostDataType[]
-    profile: ProfileDaTaType
-    status: string
+    profile: ProfileUserStatusType
+    status: string | null
 }
 
 let initialProfileState: InitialProfileStateType = {
@@ -108,14 +107,14 @@ export const addPostAC = (newPostText: string) => {
     } as const
 }
 
-export const setUserProfile = (profile: ProfileDaTaType) => {
+export const setUserProfile = (profile: ProfileUserStatusType) => {
     return {
         type: 'SET-USER-PROFILE',
         profile
     } as const
 }
 
-export const setStatus = (status: string) => {
+export const setStatus = (status: string | null) => {
     return {
         type: 'SET-USER-STATUS',
         status

@@ -1,5 +1,5 @@
 import {authAPI} from '../api/api';
-import {Dispatch} from 'redux';
+import {AppThunk} from './redux-store';
 
 export type DatePropsType = {
     id: number | null
@@ -38,7 +38,7 @@ export const authReducer = (state: InitialProfileStateType = initialProfileState
         case 'SET-USER-DATE':
             return {
                 ...state,
-                ...action.data,
+                ...action.payload,
                 isAuth: true
             }
         default:
@@ -52,24 +52,53 @@ export type AuthUserDateType =
 
 type SetAuthUserDateType = ReturnType<typeof setAuthUserDate>
 
-export const setAuthUserDate = (userId: number, login: string, email: string) => {
+export const setAuthUserDate = (userId: number | null, login: string | null, email: string | null, isAuth: boolean) => {
     return {
-        type: 'SET-USER-DATE',
-        data: {
+        type: 'SET-USER-DATE' as const,
+        payload: {
             userId,
+            isAuth,
             login,
             email,
         }
-    } as const
+    }
 }
 
-export const getAuthUserDate = () => {
-    return (dispatch: Dispatch<AuthUserDateType>) => {
-        authAPI.me().then(data => {
-            if (data.resultCode === 0) {
-                let {id, login, email} = data.data
-                dispatch(setAuthUserDate(id, login, email))
+export const getAuthUserDate = (): AppThunk => (dispatch) => {
+    authAPI.me()
+        .then(response => {
+            if (response.data.resultCode === 0) {
+                let {id, login, email} = response.data.data
+                dispatch(setAuthUserDate(id, login, email, true))
             }
         })
-    }
+
+}
+
+export const login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
+    authAPI.login(email, password, rememberMe)
+        .then(response => {
+            console.log('login', response)
+            if (response.data.resultCode === 0) {
+                dispatch(getAuthUserDate())
+                // {
+                //     type: 'SET-USER-DATE' as const,
+                //     payload: {
+                //         userId: response.data.userId,
+                //         isAuth: response.data.isAuth,
+                //         login: response.data.login,
+                //         email: response.data.email,
+                //     }
+                // })
+            }
+        })
+
+}
+
+export const logout = (): AppThunk => (dispatch) => {
+    authAPI.logout().then(response => {
+        if (response.data.resultCode === 0) {
+            dispatch(setAuthUserDate(null, null, null, false))
+        }
+    })
 }

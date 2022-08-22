@@ -7,11 +7,9 @@ import {maxLengthCreator, required} from '../../../utils/validators/validators';
 import {Textarea} from '../../FormsControls/FormControls';
 
 
-
 type MyPostsPropsType = {
     addPost: (postPost: string) => void
     postData: PostDataType[]
-
 }
 
 type FormAddMyPostType = {
@@ -20,11 +18,9 @@ type FormAddMyPostType = {
 
 
 export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
-
     let postsElement = props.postData.map((p) => <Post key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     const onAddPost = (values: FormAddMyPostType) => {
-        debugger
         props.addPost(values.newPostText)
     }
 
@@ -47,7 +43,8 @@ const AddNewPostForm: React.FC<InjectedFormProps<FormAddMyPostType>> = (props) =
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name="newPostText" component={Textarea} placeholder='new message'  validate={[required, maxLength10]} type='text'/>
+                <Field name="newPostText" component={Textarea} placeholder="new message"
+                       validate={[required, maxLength10]} type="text"/>
             </div>
             <div>
                 <button>Add post</button>

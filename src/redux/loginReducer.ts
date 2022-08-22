@@ -6,16 +6,13 @@ import {Dispatch} from 'redux';
 //
 // type InitialProfileStateType = {
 // }
-type InitialProfileStateType = {
-}
+type InitialProfileStateType = {}
 
 
-let initialProfileState = {
-
-}
+let initialProfileState = {}
 
 
-export const loginReducer = (state: any, action:any): any => {
+export const loginReducer = (state: any, action: any): any => {
     switch (action.type) {
 
         case '':
@@ -29,7 +26,7 @@ export type AuthUserDateType =
     SetAuthUserDateType
 
 
-type SetAuthUserDateType = ReturnType<typeof setAuthUserDate>
+export type SetAuthUserDateType = ReturnType<typeof setAuthUserDate>
 
 export const setAuthUserDate = () => {
     return {

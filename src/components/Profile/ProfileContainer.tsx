@@ -1,14 +1,15 @@
 import React from 'react';
 import {Profile} from './Profile';
 import {connect} from 'react-redux';
-import {getUserProfile, getUserStatus, ProfileDaTaType, updateStatus} from '../../redux/profileReducer';
+import {getUserProfile, getUserStatus, updateStatus} from '../../redux/profileReducer';
 import {AppStateType} from '../../redux/redux-store';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {compose} from 'redux';
+import {ProfileUserStatusType} from '../../api/api';
 
 type MapStateToPropsType = {
-    profile: ProfileDaTaType
-    status: string
+    profile: ProfileUserStatusType
+    status: string|null
 }
 type MapDispatchToPropsType = {
     getUserProfile: (userId: number) => void

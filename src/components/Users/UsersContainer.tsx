@@ -3,7 +3,6 @@ import {
     followSuccess,
     setCurrentPage,
     unfollowSuccess,
-    UsersType,
     toggleIsFollowingProgress,
     getUserThunkCreator,
     follow,
@@ -15,10 +14,11 @@ import Users from './Users';
 import {Preloader} from '../common/Preloader/Preloader';
 import {compose} from 'redux';
 import {withAuthRedirect} from '../../Hoc/withAuthRedirect';
+import {ItemsUsersType} from '../../api/api';
 
 
 type MapStateToPropsType = {
-    users: UsersType[]
+    users: ItemsUsersType[]
     pageSize: number
     totalUsersCount: number
     currentPage: number
@@ -28,7 +28,7 @@ type MapStateToPropsType = {
 export type MapDispatchToPropsType = {
     follow: (userId: number) => void
     unfollow: (userId: number) => void
-    setUser: (users: UsersType[]) => void
+    setUser: (users: ItemsUsersType[]) => void
     setCurrentPage: (pageNumber: number) => void
     setTotalUsersCount: (totalCount: number) => void
     toggleIsFetching: (isFetching: boolean) => void
@@ -38,7 +38,7 @@ export type MapDispatchToPropsType = {
 
 
 export type UsersPropsType = {
-    users: UsersType[]
+    users: ItemsUsersType[]
     follow: (userId: number) => void
     unfollow: (userId: number) => void
     pageSize: number

@@ -1,11 +1,12 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
-import {profileReducer} from './profileReducer';
-import {dialogsReducer} from './dialogsReducer';
+import {AddPostType, profileReducer} from './profileReducer';
+import {AddMessage, dialogsReducer} from './dialogsReducer';
 import {sidebarReducer} from './sidebarReducer';
-import {usersReducer} from './usersReducer';
-import {authReducer} from './authReducer';
-import thunkMiddleware from 'redux-thunk'
-import { reducer as formReducer } from 'redux-form'
+import {FollowUnfollowType, usersReducer} from './usersReducer';
+import {authReducer, AuthUserDateType} from './authReducer';
+import thunkMiddleware, {ThunkAction} from 'redux-thunk'
+import {reducer as formReducer} from 'redux-form'
+import {SetAuthUserDateType} from './loginReducer';
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -13,7 +14,7 @@ let rootReducer = combineReducers({
     sidebarPage: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    form:formReducer,
+    form: formReducer,
 
 })
 
@@ -21,6 +22,17 @@ export type AppStoreType = typeof store
 export type AppStateType = ReturnType<typeof rootReducer>
 
 export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+
+
+//общий акшен со всех редюсеров
+export  type AppActionType = AddPostType
+    | AuthUserDateType
+    | AddMessage
+    | SetAuthUserDateType
+    | FollowUnfollowType
+
+
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, AppActionType>
 
 
 // @ts-ignore
