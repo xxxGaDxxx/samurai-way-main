@@ -1,5 +1,7 @@
 import {authAPI} from '../api/api';
 import {AppThunk} from './redux-store';
+import {FormErrors, stopSubmit} from 'redux-form';
+
 
 export type DatePropsType = {
     id: number | null
@@ -7,7 +9,6 @@ export type DatePropsType = {
     email: string | null
     isAuth: boolean
 }
-
 type InitialProfileStateType = {
     userId: number | null
     login: string | null
@@ -15,7 +16,6 @@ type InitialProfileStateType = {
     isAuth: boolean
 
 }
-
 let initialProfileState = {
     userId: null,
     login: null,
@@ -64,12 +64,15 @@ export const getAuthUserDate = (): AppThunk => (dispatch) => {
         })
 }
 
+
 export const login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
     authAPI.login(email, password, rememberMe)
         .then(response => {
-            console.log('login', response)
             if (response.data.resultCode === 0) {
                 dispatch(getAuthUserDate())
+            } else {
+                let message = response.data.messages.length > 0 ? response.data.messages[0]:'Some error'
+                dispatch(stopSubmit('login', {_error: message}))
             }
         })
 }

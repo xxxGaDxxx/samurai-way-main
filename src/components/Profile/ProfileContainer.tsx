@@ -10,6 +10,8 @@ import {ProfileUserStatusType} from '../../api/api';
 type MapStateToPropsType = {
     profile: ProfileUserStatusType
     status: string|null
+    authorizedUserId:number|null
+    isAuth:boolean
 }
 type MapDispatchToPropsType = {
     getUserProfile: (userId: number) => void
@@ -28,9 +30,9 @@ class ProfileContainer extends React.Component<PropsType> {
 
     componentDidMount() {
         let userId = this.props.match.params.userId
-        console.log(userId)
         if (!userId) {
-           userId = "23422"
+
+           userId = String(this.props.authorizedUserId)
         }
         this.props.getUserProfile(Number(userId))
         this.props.getUserStatus(Number(userId))
@@ -38,7 +40,11 @@ class ProfileContainer extends React.Component<PropsType> {
 
     render() {
         return (
-            <Profile {...this.props} profile={this.props.profile} status={this.props.status} updateStatus={this.props.updateStatus}/>
+            <Profile {...this.props}
+                     profile={this.props.profile}
+                     status={this.props.status}
+                     updateStatus={this.props.updateStatus}
+            />
         )
     }
 }
@@ -47,11 +53,13 @@ class ProfileContainer extends React.Component<PropsType> {
 let mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
+    authorizedUserId:state.auth.userId,
+    isAuth:state.auth.isAuth,
 })
 
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile,getUserStatus,updateStatus}),
+    connect(mapStateToProps, {getUserProfile,getUserStatus,updateStatus,}),
     withRouter,
 )(ProfileContainer)
 

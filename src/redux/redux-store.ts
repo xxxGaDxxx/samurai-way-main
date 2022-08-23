@@ -1,11 +1,11 @@
-import {applyMiddleware, combineReducers, createStore} from 'redux';
+import {Action, applyMiddleware, combineReducers, createStore} from 'redux';
 import {AddPostType, profileReducer} from './profileReducer';
 import {AddMessage, dialogsReducer} from './dialogsReducer';
 import {sidebarReducer} from './sidebarReducer';
 import {FollowUnfollowType, usersReducer} from './usersReducer';
 import {authReducer, AuthUserDateType} from './authReducer';
 import thunkMiddleware, {ThunkAction} from 'redux-thunk'
-import {reducer as formReducer} from 'redux-form'
+import {FormAction, reducer as formReducer, StopSubmitAction} from 'redux-form'
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -23,15 +23,14 @@ export type AppStateType = ReturnType<typeof rootReducer>
 export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
 
-//общий акшен со всех редюсеров
+//общий екшен со всех редюсеров
 export  type AppActionType = AddPostType
     | AuthUserDateType
     | AddMessage
     | FollowUnfollowType
 
-//типизация сатки
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, AppActionType>
-
+//типизация сатки(в санки добавили екшен редаксовский , что бы можно было диспачить в санке в форм-редас stopSubmit)
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, Action >
 
 // @ts-ignore
 window.store = store

@@ -3,6 +3,7 @@ import s from './ProfileInfo.module.css'
 import {Preloader} from '../../common/Preloader/Preloader';
 import ProfileStatus from './ProfileStatus';
 import {ProfileUserStatusType} from '../../../api/api';
+import preloader from '../../../assets/img/user.jpg';
 
 
 
@@ -18,14 +19,13 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
     }
     return (
         <div>
-            {/*<div>*/}
-            {/*    <img*/}
-            {/*        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS2yeV0nBNNcM90so1GkoNpKRGP2DbpNjdqZw&usqp=CAU" alt={''}/>*/}
-            {/*</div>*/}
+            <div>
+                <img src={props.profile.photos.small === null ? preloader : props.profile.photos.small} alt={''}/>
+            </div>
             <div className={s.descriptionBlock}>
                 <div>
 
-                    <img src={props.profile.photos.large!== null ?props.profile.photos.large:''} alt={''}/>
+                    {/*<img src={props.profile.photos.large!== null ?props.profile.photos.large:''} alt={''}/>*/}
                     <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 </div>
                 <div>

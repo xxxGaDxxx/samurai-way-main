@@ -39,7 +39,7 @@ export const authAPI = {
         return instance.post<ResponseLoginFollowType<{ userId: number }>>(`auth/login`, {email, password, rememberMe})
     },
     logout() {
-        return instance.delete(`auth/login`)
+        return instance.delete<ResponseLoginFollowType>(`auth/login`)
     }
 }
 
@@ -55,6 +55,8 @@ export const profileAPI = {
         return instance.put<ResponseLoginFollowType>(`profile/status`, {status: status})
     }
 }
+
+
 
 
 export type UserApiResponseType = {
@@ -102,7 +104,6 @@ export type ProfileUserStatusType = {
     userId: number
     photos: PhotosType
 }
-
 export type SocialNetworks = {
     facebook: string | null
     website: string | null
@@ -113,7 +114,6 @@ export type SocialNetworks = {
     github: string | null
     mainLink: string | null
 }
-
 export type PhotosType = {
     small: string | null
     large: string | null
