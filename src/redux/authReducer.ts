@@ -7,14 +7,7 @@ export type DatePropsType = {
     email: string | null
     isAuth: boolean
 }
-//
-// type InitialProfileStateType = {
-//     data: DatePropsType
-//     messages?: Array<string>
-//     fieldsErrors?: Array<string>
-//     resultCode: number| null
-//
-// }
+
 type InitialProfileStateType = {
     userId: number | null
     login: string | null
@@ -22,7 +15,6 @@ type InitialProfileStateType = {
     isAuth: boolean
 
 }
-
 
 let initialProfileState = {
     userId: null,
@@ -39,16 +31,13 @@ export const authReducer = (state: InitialProfileStateType = initialProfileState
             return {
                 ...state,
                 ...action.payload,
-                isAuth: true
             }
         default:
             return state
     }
 }
 
-export type AuthUserDateType =
-    SetAuthUserDateType
-
+export type AuthUserDateType = SetAuthUserDateType
 
 type SetAuthUserDateType = ReturnType<typeof setAuthUserDate>
 
@@ -64,6 +53,7 @@ export const setAuthUserDate = (userId: number | null, login: string | null, ema
     }
 }
 
+
 export const getAuthUserDate = (): AppThunk => (dispatch) => {
     authAPI.me()
         .then(response => {
@@ -72,7 +62,6 @@ export const getAuthUserDate = (): AppThunk => (dispatch) => {
                 dispatch(setAuthUserDate(id, login, email, true))
             }
         })
-
 }
 
 export const login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
@@ -81,18 +70,8 @@ export const login = (email: string, password: string, rememberMe: boolean): App
             console.log('login', response)
             if (response.data.resultCode === 0) {
                 dispatch(getAuthUserDate())
-                // {
-                //     type: 'SET-USER-DATE' as const,
-                //     payload: {
-                //         userId: response.data.userId,
-                //         isAuth: response.data.isAuth,
-                //         login: response.data.login,
-                //         email: response.data.email,
-                //     }
-                // })
             }
         })
-
 }
 
 export const logout = (): AppThunk => (dispatch) => {

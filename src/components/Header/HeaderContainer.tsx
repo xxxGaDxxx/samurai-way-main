@@ -1,9 +1,10 @@
 import React from 'react';
 import {Header} from './Header';
 import {connect} from 'react-redux';
-import {getAuthUserDate} from '../../redux/authReducer';
+import {getAuthUserDate, logout} from '../../redux/authReducer';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {AppStateType} from '../../redux/redux-store';
+
 
 
 type MapStateToPropsType = {
@@ -12,15 +13,16 @@ type MapStateToPropsType = {
     email: string | null
     isAuth: boolean
 }
-type MapDispatchToPropsType = {
+export type MapDispatchToPropsType = {
     getAuthUserDate: () => void
+    logout: () => void
 }
 
 type PathParamsType = {
 
 }
 
-type HeaderContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
+export type HeaderContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 type PropsType = RouteComponentProps<PathParamsType> & HeaderContainerPropsType
 
@@ -51,4 +53,4 @@ let mapStateToProps = (state: AppStateType) :MapStateToPropsType=> {
 
 let WithUrlDataContainerComponent = withRouter(HeaderContainer);
 
-export default connect(mapStateToProps, {getAuthUserDate})(WithUrlDataContainerComponent)
+export default connect(mapStateToProps, {getAuthUserDate,logout})(WithUrlDataContainerComponent)

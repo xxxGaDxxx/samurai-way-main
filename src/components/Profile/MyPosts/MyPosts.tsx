@@ -11,7 +11,6 @@ type MyPostsPropsType = {
     addPost: (postPost: string) => void
     postData: PostDataType[]
 }
-
 type FormAddMyPostType = {
     newPostText: string
 }
@@ -38,12 +37,11 @@ export const MyPosts: React.FC<MyPostsPropsType> = (props) => {
 
 const maxLength10 = maxLengthCreator(10)
 
-
 const AddNewPostForm: React.FC<InjectedFormProps<FormAddMyPostType>> = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name="newPostText" component={Textarea} placeholder="new message"
+                <Field name="newPostText" component={Textarea} placeholder="new post"
                        validate={[required, maxLength10]} type="text"/>
             </div>
             <div>

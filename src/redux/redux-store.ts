@@ -6,7 +6,6 @@ import {FollowUnfollowType, usersReducer} from './usersReducer';
 import {authReducer, AuthUserDateType} from './authReducer';
 import thunkMiddleware, {ThunkAction} from 'redux-thunk'
 import {reducer as formReducer} from 'redux-form'
-import {SetAuthUserDateType} from './loginReducer';
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -28,10 +27,9 @@ export let store = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 export  type AppActionType = AddPostType
     | AuthUserDateType
     | AddMessage
-    | SetAuthUserDateType
     | FollowUnfollowType
 
-
+//типизация сатки
 export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, AppActionType>
 
 
