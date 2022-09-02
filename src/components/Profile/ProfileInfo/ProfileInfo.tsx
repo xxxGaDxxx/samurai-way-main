@@ -25,7 +25,7 @@ export const ProfileInfo: React.FC<ProfileInfoPropsType> = (props) => {
             <div className={s.descriptionBlock}>
                 <div>
 
-                    {/*<img src={props.profile.photos.large!== null ?props.profile.photos.large:''} alt={''}/>*/}
+                    <img src={props.profile.photos.large!== null ?props.profile.photos.large:''} alt={''}/>
                     <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
                 </div>
                 <div>

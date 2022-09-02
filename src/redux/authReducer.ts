@@ -1,6 +1,6 @@
 import {authAPI} from '../api/api';
 import {AppThunk} from './redux-store';
-import {FormErrors, stopSubmit} from 'redux-form';
+import { stopSubmit} from 'redux-form';
 
 
 export type DatePropsType = {
@@ -55,7 +55,7 @@ export const setAuthUserDate = (userId: number | null, login: string | null, ema
 
 
 export const getAuthUserDate = (): AppThunk => (dispatch) => {
-    authAPI.me()
+    return authAPI.me()
         .then(response => {
             if (response.data.resultCode === 0) {
                 let {id, login, email} = response.data.data

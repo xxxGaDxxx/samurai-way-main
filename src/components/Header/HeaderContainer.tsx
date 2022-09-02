@@ -1,7 +1,7 @@
 import React from 'react';
 import {Header} from './Header';
 import {connect} from 'react-redux';
-import {getAuthUserDate, logout} from '../../redux/authReducer';
+import { logout} from '../../redux/authReducer';
 import {RouteComponentProps, withRouter} from 'react-router';
 import {AppStateType} from '../../redux/redux-store';
 
@@ -14,7 +14,6 @@ type MapStateToPropsType = {
     isAuth: boolean
 }
 export type MapDispatchToPropsType = {
-    getAuthUserDate: () => void
     logout: () => void
 }
 
@@ -29,9 +28,9 @@ type PropsType = RouteComponentProps<PathParamsType> & HeaderContainerPropsType
 
 class HeaderContainer extends React.Component<PropsType> {
 
-    componentDidMount() {
-        this.props.getAuthUserDate()
-    }
+    // componentDidMount() {
+    //     this.props.getAuthUserDate()
+    // }
 
     render() {
         return <>
@@ -53,4 +52,4 @@ let mapStateToProps = (state: AppStateType) :MapStateToPropsType=> {
 
 let WithUrlDataContainerComponent = withRouter(HeaderContainer);
 
-export default connect(mapStateToProps, {getAuthUserDate,logout})(WithUrlDataContainerComponent)
+export default connect(mapStateToProps, {logout})(WithUrlDataContainerComponent)

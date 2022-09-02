@@ -5,7 +5,8 @@ import {sidebarReducer} from './sidebarReducer';
 import {FollowUnfollowType, usersReducer} from './usersReducer';
 import {authReducer, AuthUserDateType} from './authReducer';
 import thunkMiddleware, {ThunkAction} from 'redux-thunk'
-import {FormAction, reducer as formReducer, StopSubmitAction} from 'redux-form'
+import {reducer as formReducer} from 'redux-form'
+import {appReducer} from './appReducer';
 
 let rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -14,6 +15,7 @@ let rootReducer = combineReducers({
     usersPage: usersReducer,
     auth: authReducer,
     form: formReducer,
+    app:appReducer,
 
 })
 
@@ -30,7 +32,7 @@ export  type AppActionType = AddPostType
     | FollowUnfollowType
 
 //типизация сатки(в санки добавили екшен редаксовский , что бы можно было диспачить в санке в форм-редас stopSubmit)
-export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, Action >
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, AppStateType, unknown, Action>
 
 // @ts-ignore
 window.store = store

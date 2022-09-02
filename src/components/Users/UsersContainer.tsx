@@ -58,32 +58,11 @@ class UsersAPIContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
 
         this.props.getUserThunkCreator(this.props.currentPage, this.props.pageSize)
-
-        // this.props.toggleIsFetching(true)
-        // // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`,{
-        // //     withCredentials:true
-        // // })
-        // usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then(data => {
-        //     this.props.toggleIsFetching(false)
-        //     this.props.setUser(data.items)
-        //     this.props.setTotalUsersCount(data.totalCount)
-        //
-        // })
     }
 
     onPageChanged = (pageNumber: number) => {
 
         this.props.getUserThunkCreator(pageNumber, this.props.pageSize)
-        // this.props.setCurrentPage(pageNumber)
-        // this.props.toggleIsFetching(true)
-        // // axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`,{
-        // //     withCredentials:true
-        // // })
-        // usersAPI.getUsers(pageNumber, this.props.pageSize).then(data => {
-        //     this.props.toggleIsFetching(false)
-        //     this.props.setUser(data.items)
-        //
-        // })
     }
 
     render() {
