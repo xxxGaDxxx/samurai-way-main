@@ -1,6 +1,6 @@
 import {authAPI} from '../api/api';
 import {AppThunk} from './redux-store';
-import { stopSubmit} from 'redux-form';
+import {stopSubmit} from 'redux-form';
 
 
 export type DatePropsType = {
@@ -65,22 +65,22 @@ export const getAuthUserDate = (): AppThunk => (dispatch) => {
 }
 
 
-export const login = (email: string, password: string, rememberMe: boolean): AppThunk => (dispatch) => {
-    authAPI.login(email, password, rememberMe)
-        .then(response => {
-            if (response.data.resultCode === 0) {
-                dispatch(getAuthUserDate())
-            } else {
-                let message = response.data.messages.length > 0 ? response.data.messages[0]:'Some error'
-                dispatch(stopSubmit('login', {_error: message}))
-            }
-        })
+export const login = (email: string, password: string, rememberMe: boolean): AppThunk => async (dispatch) => {
+    let response = await authAPI.login(email, password, rememberMe)
+
+    if (response.data.resultCode === 0) {
+        dispatch(getAuthUserDate())
+    } else {
+        let message = response.data.messages.length > 0 ? response.data.messages[0] : 'Some error'
+        dispatch(stopSubmit('login', {_error: message}))
+    }
+
 }
 
-export const logout = (): AppThunk => (dispatch) => {
-    authAPI.logout().then(response => {
-        if (response.data.resultCode === 0) {
-            dispatch(setAuthUserDate(null, null, null, false))
-        }
-    })
+export const logout = (): AppThunk => async (dispatch) => {
+    let response = await authAPI.logout()
+    if (response.data.resultCode === 0) {
+        dispatch(setAuthUserDate(null, null, null, false))
+    }
+
 }

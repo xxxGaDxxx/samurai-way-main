@@ -64,13 +64,13 @@ export type UsersPropsType = {
 
 class UsersAPIContainer extends React.Component<UsersPropsType> {
     componentDidMount() {
-
-        this.props.getUserThunkCreator(this.props.currentPage, this.props.pageSize)
+        let {currentPage, pageSize} = this.props
+        this.props.getUserThunkCreator(currentPage, pageSize)
     }
 
     onPageChanged = (pageNumber: number) => {
-
-        this.props.getUserThunkCreator(pageNumber, this.props.pageSize)
+        let {pageSize} = this.props
+        this.props.getUserThunkCreator(pageNumber, pageSize)
     }
 
     render() {
