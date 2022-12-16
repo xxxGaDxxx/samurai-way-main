@@ -1,56 +1,56 @@
-import {addPostAC} from './profileReducer';
-import {sendMessageAC} from './dialogsReducer';
+import {addPostAC} from '../features/Profile/profileReducer';
+import {sendMessageAC} from '../features/Dialogs/dialogsReducer';
 
- type PostDataType = {
-    id: number
-    message: string
-    likesCount: number
+type PostDataType = {
+  id: number
+  message: string
+  likesCount: number
 }
- type DialogsDataType = {
-    id: number
-    name: string
-    foto: string
+type DialogsDataType = {
+  id: number
+  name: string
+  photo: string
 }
- type MessagesType = {
-    id: number
-    message: string
-    foto: string
-    name: string
+type MessagesType = {
+  id: number
+  message: string
+  photo: string
+  name: string
 }
 export type FriendsType = {
-    id: number
-    name: string
-    foto: string
+  id: number
+  name: string
+  photo: string
 }
 export type ProfilePagePropsType = {
-    postData: PostDataType[]
-    newPostText: string
+  postData: PostDataType[]
+  newPostText: string
 }
 export type DilogsPagePropsType = {
-    dialogsData: DialogsDataType[]
-    messages: MessagesType[]
-    newMessageText: string
+  dialogsData: DialogsDataType[]
+  messages: MessagesType[]
+  newMessageText: string
 }
 export type SidebarPropsType = {
-    friends: FriendsType[]
+  friends: FriendsType[]
 }
 export type StatePropsType = {
-    profilePage: ProfilePagePropsType
-    dialogsPage: DilogsPagePropsType
-    sidebarPage: SidebarPropsType
+  profilePage: ProfilePagePropsType
+  dialogsPage: DilogsPagePropsType
+  sidebarPage: SidebarPropsType
 }
 
 export type StorePropsType = {
-    _state: StatePropsType
-    _callSubscriber: () => void
-    subscribe: (observer: () => void) => void
-    getState: () => StatePropsType
-    dispatch: (action: ActionPropsType) => void
+  _state: StatePropsType
+  _callSubscriber: () => void
+  subscribe: (observer: () => void) => void
+  getState: () => StatePropsType
+  dispatch: (action: ActionPropsType) => void
 }
 
 
- type ActionPropsType =
-    ReturnType<typeof addPostAC>
-    // | ReturnType<typeof onPostChangeAC>
-    | ReturnType<typeof sendMessageAC>
-    // | ReturnType<typeof onMessageChangeAC>
+type ActionPropsType =
+  ReturnType<typeof addPostAC>
+  // | ReturnType<typeof onPostChangeAC>
+  | ReturnType<typeof sendMessageAC>
+// | ReturnType<typeof onMessageChangeAC>
