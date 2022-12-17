@@ -4,6 +4,7 @@ import {setAppStatusAC} from "../../app/appReducer";
 import {randomId} from "../../common/utils/randomId";
 import {PhotosType} from "../Users/usersReducer";
 import {AppStateType} from "../../redux/redux-store";
+import {stopSubmit} from "redux-form";
 
 
 let initialProfileState: InitialProfileStateType = {
@@ -144,8 +145,25 @@ export const updateStatusTC = (status: string): any => async (dispatch: Dispatch
     dispatch(setAppStatusAC("idle"))
   }
 }
-export const saveProfileTC = (file: ProfileUserStatusType): any => async (dispatch: Dispatch) => {
-
+export const saveProfileTC = (formData: ProfileUserStatusType): any => async (dispatch: Dispatch, getState: () => AppStateType) => {
+  dispatch(setAppStatusAC("loading"))
+  const userId = getState().auth.userId
+  try {
+    const res = await profileAPI.saveProfile(formData)
+    if (res.data.resultCode === 0) {
+      if (userId) {
+        dispatch(getUserProfileTC(userId))
+      }
+    }else {
+      const action: any = stopSubmit('profileData', {_error: res.data.messages[0]})
+      dispatch(action)
+      return Promise.reject(res.data.messages[0])
+    }
+  } catch (err) {
+    console.error(err)
+  } finally {
+    dispatch(setAppStatusAC("idle"))
+  }
 }
 
 export const savePhotoTC = (file: File): any => async (dispatch: Dispatch, getState: () => AppStateType) => {

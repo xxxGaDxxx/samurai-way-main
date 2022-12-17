@@ -17,11 +17,11 @@ export const Header = (props: HeaderPropsType) => {
     <header className={styles.headerComponent}>
       <div className={styles.headerBox}>
         <div className={styles.searchBox}>
-          {/*<img*/}
-          {/*  className={styles.image}*/}
-          {/*  alt={'Logo'}*/}
-          {/*  src={imgLogo}*/}
-          {/*/>*/}
+          <img
+            className={styles.image}
+            alt={'Logo'}
+            src='https://uxwing.com/wp-content/themes/uxwing/download/brands-and-social-media/mastodon-icon.png'
+          />
 
         </div>
         <Navbar

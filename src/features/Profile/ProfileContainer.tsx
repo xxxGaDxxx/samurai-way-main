@@ -125,7 +125,6 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     savePhoto: (file: File) => dispatch(savePhotoTC(file)),
     saveProfile: (formData: ProfileUserStatusType) => dispatch(saveProfileTC(formData)),
     followTC: (userId: number) => dispatch(followTC(userId)),
-
     usFollowTC: (userId: number) => dispatch(unfollowTC(userId)),
     addPost: (formData: AddPostFormType) => dispatch(addPostAC(formData.newPostText)),
     reset: () => dispatch(reset('addPostForm')),
