@@ -1,7 +1,7 @@
 import React from "react";
 import styles from './DialogItem.module.scss'
 // import {DialogsDataType} from "../dialogs-reducer";
-import imgAvatar from '../../../assets/img/user.png'
+import imgAvatar from '../../../assets/user.png'
 import {DialogsDataType} from "../dialogsReducer";
 
 export const DialogItem = (props: DialogsDataType) => {

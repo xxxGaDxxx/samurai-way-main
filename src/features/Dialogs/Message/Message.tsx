@@ -1,5 +1,5 @@
 import React from "react";
-import imgAvatar from "../../../assets/img/user.png";
+import imgAvatar from "../../../assets/user.png";
 import {MessagesDataType} from "../dialogsReducer";
 import s from './Message.module.scss'
 

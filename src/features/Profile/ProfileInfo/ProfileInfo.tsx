@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useRef, useState} from "react";
 import styles from './ProfileInfo.module.scss'
-import userImg from '../../../assets/img/user.png'
+import userImg from '../../../assets/user.png'
 import {NavLink} from "react-router-dom";
 import {ProfileUserStatusType} from "../../../api/api";
 import {RequestStatusType} from "../../../app/appReducer";

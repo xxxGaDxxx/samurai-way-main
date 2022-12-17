@@ -5,7 +5,7 @@ import {Message} from "./Message/Message";
 // import {DialogsPropsType} from "./DialogsContainer";
 // import {AddMessageFormRedux, AddMessageFormType} from "./addMessageForm/AddMessageForm";
 import {RepairComponent} from "../../common/components/RepairComponent/RepairComponent";
-import imgAvatar from "../../assets/img/user.png";
+import imgAvatar from "../../assets/user.png";
 import {AddMessageFormRedux, AddMessageFormType} from "./AddMessageForm/AddMessageForm";
 import {DialogItem} from "./DialogItem/DialogsItem";
 import {DialogsPropsType} from "./DialogsContainer";

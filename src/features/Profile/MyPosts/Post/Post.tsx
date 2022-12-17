@@ -1,6 +1,6 @@
 import React from "react";
 import styles from './Post.module.scss'
-import avatar from '../../../../assets/img/user.png'
+import avatar from '../../../../assets/user.png'
 import {SvgSelector} from "../../../../common/components/SvgSelector/SvgSelector";
 
 type PostPropsType = {
